@@ -25,7 +25,7 @@ public class Maze {
 
 
     /**
-     *
+     * Finds valid neighbors in the north, east, south, and west directions
      * @return a list of coordinate pairs in the adj-matrix
      */
     public ArrayList<Cell> findAdjacentNeighbors(Cell cell) {
@@ -40,10 +40,12 @@ public class Maze {
         int endPosY = ((cell.getY() + 1 > (numVertices - 1))) ? cell.getY() : cell.getY() + 1;
 
         // grid[i][j] are the neighbors of the current cell
-        for(int i  = startPosX; i < endPosX; i++) {
-            for(int j = startPosY; j < endPosY; j++) {
-                // adding to a list of cells so that we can keep track of individual coordinates
-                neighbors.add(new Cell(i, j));
+        for(int i  = startPosX; i <= endPosX; i++) {
+            for(int j = startPosY; j <= endPosY; j++) {
+                // adding to a list of cells so that we can keep track of neighbor coordinates
+                if(i != cell.getX() && j != cell.getY()) {
+                    neighbors.add(new Cell(i, j));
+                }
             }
         }
         return neighbors;

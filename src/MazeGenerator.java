@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class MazeGenerator {
@@ -16,8 +17,19 @@ public class MazeGenerator {
 
         while(visitedCells < totalCells) {
             // find all neighbors of currentCell with all walls intact
-            for(int i = currCell; i < maze.getAdjMatrix().length; i++) {
-                ArrayList<Cell> neighbors = maze.findAdjacentNeighbors(currCell);
+            ArrayList<Cell> neighbors = maze.findAdjacentNeighbors(currCell);
+            for(Cell neighbor : neighbors) {
+                if(maze.getAdjMatrix()[neighbor.getX()][neighbor.getY()] == 0) {
+                    maze.getAdjMatrix()[neighbor.getX()][neighbor.getY()] = 1;
+                    cellStack.push(currCell);
+                    currCell = new Cell(neighbor.getX(), neighbor.getY());
+                    visitedCells++;
+                    break;
+                }
+                else {
+                    // pop the most recent cell off stack and make it currCell
+                    currCell = cellStack.pop();
+                }
             }
         }
     }
