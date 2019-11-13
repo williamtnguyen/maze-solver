@@ -11,13 +11,13 @@ public class MazeGenerator {
         // stack eliminates recursion
         Stack<Cell> cellStack = new Stack<>();
         int totalCells = (int) Math.pow(maze.getNumVertices(), 2);
-        int currCell = maze.getAdjMatrix()[0][0];
+        Cell currCell = new Cell(0, 0); // already "open-pathed" upon initialization of adj-matrix
         int visitedCells = 1; // visited 1 cell thus far
 
         while(visitedCells < totalCells) {
             // find all neighbors of currentCell with all walls intact
             for(int i = currCell; i < maze.getAdjMatrix().length; i++) {
-                ArrayList<Cell> neighbors = maze.findAdjacentNeighbors();
+                ArrayList<Cell> neighbors = maze.findAdjacentNeighbors(currCell);
             }
         }
     }
