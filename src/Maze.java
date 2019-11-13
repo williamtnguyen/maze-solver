@@ -13,7 +13,7 @@ public class Maze {
         this.numVertices = numVertices;
         adjMatrix = new int[numVertices][numVertices]; // Maze is of size r * r
 
-        // Marking starting and finishing endpoints as open paths
+        // Marking starting and finishing points as open paths
         adjMatrix[0][0] = 1;
         adjMatrix[numVertices - 1][numVertices - 1] = 1;
     }
