@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="8552b342-0b2e-4e51-93ba-b451b4025227" name="Default Changelist" comment="" />
+=======
     <list default="true" id="8552b342-0b2e-4e51-93ba-b451b4025227" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/maze-solver.iws" beforeDir="false" afterPath="$PROJECT_DIR$/maze-solver.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MazeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MazeGenerator.java" afterDir="false" />
     </list>
+>>>>>>> eba46060ce8b47d0c887edd160fc4b5d695ffd17
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
