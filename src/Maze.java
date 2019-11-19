@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
@@ -34,18 +35,17 @@ public class Maze {
 
     /**
      * Starts off with a grid, then uses DFS to generate a solvable maze
-     * @return generated maze
      */
     public void generateMaze() {
         // stack eliminates recursion
         Stack<Cell> cellStack = new Stack<>();
-        int totalCells = (int) Math.pow(getNumVertices(), 2);
+        int totalCells = getNumVertices() * getNumVertices();
         Cell currCell = new Cell(0, 0); // already "open-pathed" upon initialization of adj-matrix
         int visitedCells = 1; // visited 1 cell thus far
 
         while (visitedCells < totalCells) {
             // find all neighbors of currentCell with all walls intact
-            ArrayList<Cell> neighbors = maze.findAdjacentNeighbors(currCell);
+            ArrayList<Cell> neighbors = findAdjacentNeighbors(currCell);
 
             // choosing a random neighbor
             Random r = new Random();
@@ -92,5 +92,35 @@ public class Maze {
             }
         }
         return neighbors;
+    }
+
+    /**
+     * Solves the maze with a greedy-search
+     * NOTE: does not visit all vertices
+     */
+    public void solveDFS() {
+        // to keep track of visit order
+        ArrayList<Cell> dfsOrder = new ArrayList<>();
+        // Stack for DFS eliminates recursion
+        Stack<Cell> cellStack = new Stack<>();
+        Cell currCell = new Cell(0, 0); // initially starting index
+        cellStack.push(currCell);
+
+        while(!cellStack.isEmpty()) {
+            // Pop a vertex from stack and print it
+            currCell = cellStack.pop();
+            // Stack may contain the same vertex twice, only append if has not been visited
+            if(!currCell.isVisited()) {
+                currCell.setVisited();
+                dfsOrder.add(currCell);
+            }
+            // pushing currCell's neighbors to the stack
+            ArrayList<Cell> neighbors = findAdjacentNeighbors(currCell);
+            for(Cell neighbor : neighbors) {
+                if(!neighbor.isVisited()) {
+                    cellStack.push(neighbor);
+                }
+            }
+        }
     }
 }
