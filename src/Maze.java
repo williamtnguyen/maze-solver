@@ -1,9 +1,17 @@
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Stack;
 
+/**
+ * Maze class starts off as a grid with all 0's (all walls up)
+ *
+ * Represents a Graph using adjacency-matrix representation to make-
+ * -retrieving neighbors much more intuitive
+ */
 public class Maze {
-    // Using adjacency-matrix representation to make obtaining neighbors
-    // of a cell much more intuitive
-    private int[][] adjMatrix; // 0 = wall, 1 = walls knocked down (i.e., edge)
+
+    // 0 = wall, 1 = walls knocked down (i.e., edge)
+    private int[][] adjMatrix;
     private int numVertices;
 
     /**
@@ -25,11 +33,46 @@ public class Maze {
 
 
     /**
+     * Starts off with a grid, then uses DFS to generate a solvable maze
+     * @return generated maze
+     */
+    public void generateMaze() {
+        // stack eliminates recursion
+        Stack<Cell> cellStack = new Stack<>();
+        int totalCells = (int) Math.pow(getNumVertices(), 2);
+        Cell currCell = new Cell(0, 0); // already "open-pathed" upon initialization of adj-matrix
+        int visitedCells = 1; // visited 1 cell thus far
+
+        while (visitedCells < totalCells) {
+            // find all neighbors of currentCell with all walls intact
+            ArrayList<Cell> neighbors = maze.findAdjacentNeighbors(currCell);
+
+            // choosing a random neighbor
+            Random r = new Random();
+            Cell neighbor = neighbors.get(r.nextInt(neighbors.size() - 1));
+
+            if (getAdjMatrix()[neighbor.getX()][neighbor.getY()] == 0) {
+                // Edge relationship is 2 Dimensional
+                getAdjMatrix()[neighbor.getX()][neighbor.getY()] = 1;
+                getAdjMatrix()[neighbor.getY()][neighbor.getX()] = 1;
+
+                cellStack.push(currCell);
+                currCell = new Cell(neighbor.getX(), neighbor.getY());
+                visitedCells++;
+            }
+            else {
+                // pop the most recent cell off stack and make it currCell
+                currCell = cellStack.pop();
+            }
+        }
+    }
+
+
+    /**
      * Finds valid neighbors in the north, east, south, and west directions
      * @return a list of coordinate pairs in the adj-matrix
      */
     public ArrayList<Cell> findAdjacentNeighbors(Cell cell) {
-
         // list of adjacent neighbors
         ArrayList<Cell> neighbors = new ArrayList<>();
 
