@@ -20,6 +20,7 @@ public class MazeGenerator {
             ArrayList<Cell> neighbors = maze.findAdjacentNeighbors(currCell);
             for(Cell neighbor : neighbors) {
                 if(maze.getAdjMatrix()[neighbor.getX()][neighbor.getY()] == 0) {
+                    // if all walls up, knock the wall down,
                     maze.getAdjMatrix()[neighbor.getX()][neighbor.getY()] = 1;
                     cellStack.push(currCell);
                     currCell = new Cell(neighbor.getX(), neighbor.getY());
