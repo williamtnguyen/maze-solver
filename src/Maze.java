@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Maze {
     // Using adjacency-matrix representation to make obtaining neighbors
     // of a cell much more intuitive
-    private int[][] adjMatrix; // 0 = wall, 1 = open path (i.e., walls knocked down)
+    private int[][] adjMatrix; // 0 = wall, 1 = walls knocked down (i.e., edge)
     private int numVertices;
 
     /**
