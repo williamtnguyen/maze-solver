@@ -32,11 +32,11 @@ public class Maze {
         Cell currCell = this.grid[0][0]; // initially the starting cell
         int visitedCells = 1;
 
+        Random r = new Random(); // set seed here for testing
         while(visitedCells < totalCells) {
             // Finding all neighbors of currCell with all walls intact
             ArrayList<Cell> neighbors = findAdjacentNeighbors(currCell);
             // If 1 or more are found, choose a Cell at random and knock down wall between it and currCell
-            Random r = new Random();
             if(!neighbors.isEmpty()) {
                 Cell neighbor = neighbors.get(r.nextInt(neighbors.size() - 1));
                 addEdge(currCell, neighbor);
