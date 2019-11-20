@@ -4,23 +4,15 @@
  */
 public class MazePrinter {
 
-    private Maze maze;
-    private int[][] adjMatrix;
-
     public MazePrinter(Maze maze) {
-        this.maze = maze;
-        this.adjMatrix = this.maze.getAdjMatrix();
+
     }
 
     /**
      * Handles displaying the unsolved maze
      */
     public void displayGraph() {
-        for(int i = 0; i < adjMatrix.length; i++) {
-            for(int j = 0; j < adjMatrix[0].length; j++) {
-                // idk idk idk idk
-            }
-        }
+
     }
 
     /**
