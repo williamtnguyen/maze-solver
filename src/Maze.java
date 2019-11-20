@@ -1,16 +1,13 @@
 import java.util.*;
 
 /**
- * Maze class starts off as a grid with all 0's (all walls up)
- *
- * Represents a Graph using adjacency-matrix representation to make-
- * -retrieving neighbors much more intuitive
+ * A Maze represented with a 2D Array of Cells (holding x & y coordinates),
  */
 public class Maze {
     // 2D Array of Cells starts off as a Grid
     private final int numVertices;
     private Cell[][] grid;
-    private ArrayList<LinkedList<Cell>> adjList;
+    private ArrayList<LinkedList<Cell>> adjList; // not sure if this is even necessary for the program to work
 
 
     public Maze(int numVertices) {
