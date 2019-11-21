@@ -7,7 +7,6 @@ public class Maze {
     // 2D Array of Cells starts off as a Grid
     private final int numVertices;
     private Cell[][] grid;
-    private ArrayList<LinkedList<Cell>> adjList; // not sure if this is even necessary for the program to work
 
 
     public Maze(int numVertices) {
@@ -16,10 +15,6 @@ public class Maze {
         // Initializing & filling the grid with Cells of proper information
         grid = new Cell[this.numVertices][this.numVertices];
         fillGrid(this.grid);
-
-        // Initializing the ArrayList and it's inner LinkedLists
-        this.adjList = new ArrayList<>();
-        for(int i = 0; i < numVertices; i++) { this.adjList.add(new LinkedList<>()); }
     }
 
     /**
@@ -34,8 +29,11 @@ public class Maze {
 
         Random r = new Random(); // set seed here for testing
         while(visitedCells < totalCells) {
-            // Finding all neighbors of currCell with all walls intact
+            // Finding all neighbors of currCell with ALL WALLS INTACT
             ArrayList<Cell> neighbors = findAdjacentNeighbors(currCell);
+            for(Cell neighbor : neighbors) {
+                if(!neighbor.allWallsIntact()) { neighbors.remove(neighbor); }
+            }
             // If 1 or more are found, choose a Cell at random and knock down wall between it and currCell
             if(!neighbors.isEmpty()) {
                 Cell neighbor = neighbors.get(r.nextInt(neighbors.size() - 1));
@@ -45,9 +43,49 @@ public class Maze {
                 visitedCells++;
             }
             else {
+                // pop the stack and backtrack
                 currCell = cellStack.pop();
             }
         }
+    }
+
+    /**
+     * DFS Iterative Solution
+     */
+    public void solveDFS() {
+        // Stack eliminates recursion: holds cell locations
+        Stack<Cell> cellStack = new Stack<>();
+        Cell currCell = this.grid[0][0]; // initially the starting cell
+        Cell finish = this.grid[numVertices - 1][numVertices - 1];
+        ArrayList<Cell> visitOrder = new ArrayList<>();
+        visitOrder.add(currCell); // first to be visited
+
+        Random r = new Random(); // set seed here for testing
+        while(!currCell.equals(finish)) {
+            // Finding all neighbors of currCell that have edges between them
+            ArrayList<Cell> neighbors = findAdjacentNeighbors(currCell);
+            for(Cell neighbor : neighbors) {
+                if(!currCell.hasEdge(neighbor)) { neighbors.remove(neighbor); }
+            }
+            // If 1 or more are found, choose a Cell at random, add it to visitOrder, and make it the new currCell
+            if(!neighbors.isEmpty()) {
+                Cell neighbor = neighbors.get(r.nextInt(neighbors.size() - 1));
+                cellStack.push(currCell);
+                currCell = neighbor;
+                visitOrder.add(currCell);
+            }
+            else {
+                // pop the stack and backtrack
+                currCell = cellStack.pop();
+            }
+        }
+    }
+
+    /**
+     * BFS Iterative Solution
+     */
+    public void solveBFS() {
+
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
@@ -85,8 +123,7 @@ public class Maze {
         for(int i  = startPosX; i <= endPosX; i++) {
             for(int j = startPosY; j <= endPosY; j++) {
                 // adding to a list of cells so that we can keep track of neighbor coordinates
-                if(i != cell.getX() && j != cell.getY() && this.grid[i][j].allWallsIntact()) {
-                    // j dictates x-index whereas i dictates y-index
+                if(i != cell.getX() && j != cell.getY()) {
                     neighbors.add(this.grid[i][j]);
                 }
             }
