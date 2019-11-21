@@ -61,6 +61,7 @@ public class Maze {
         visitOrder.add(currCell); // first to be visited
 
         Random r = new Random(); // set seed here for testing
+        // The goal is not to visit all nodes, but rather to reach the finishing Cell
         while(!currCell.equals(finish)) {
             // Finding all neighbors of currCell that have edges between them
             ArrayList<Cell> neighbors = findAdjacentNeighbors(currCell);
