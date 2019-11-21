@@ -12,15 +12,32 @@ public class ASCIIGrid {
 	private int xSize;
 	private int ySize;
 	private String[][] array;
+	private Cell[][] cellArray;
+	private int xSizeASCII;
+	private int ySizeASCII;
+	private int xASCII;
+	private int yASCII;
 	
-	
-	public ASCIIGrid(int xSize, int ySize){
+	public ASCIIGrid(int xSize, int ySize){ //Input number of rows and cols
+		this.xSize=xSize;
+		this.ySize=ySize;
+		
+		xSizeASCII=(xSize*2)+1;
+		ySizeASCII=(ySize*2)+1;
 		
 	}
 	
-	public String[][] generateASCIIGrid(int xSize, int ySize){ //rows, cols
-		int xSizeASCII=(xSize*2)+1;
-		int ySizeASCII=(ySize*2)+1;
+	public ASCIIGrid(int xSize, int ySize, Cell[][] cellArray){
+		this.xSize=xSize;
+		this.ySize=ySize;
+		this.cellArray=cellArray;
+		
+		xSizeASCII=(xSize*2)+1;
+		ySizeASCII=(ySize*2)+1;
+	}
+	
+	
+	public String[][] generateASCIIGrid(){ //rows, cols
 		array = new String[xSizeASCII][ySizeASCII]; // 9 x 9 ASCII Grid for a 4x4 Maze Grid
 //		System.out.println(xSizeASCII +"x"+ySizeASCII +" ASCII Grid for a "+ xSize+"x"+ySize
 //							+" Maze Grid");
@@ -47,41 +64,39 @@ public class ASCIIGrid {
 		return array;
 	}
 	
-	public String[][] updateASCIIGrid(int xSize, int ySize, Cell[][] arr){
-		int xSizeASCII=(xSize*2)+1;
-		int ySizeASCII=(ySize*2)+1;
+	public String[][] updateASCIIGrid(){
 		String[][] updated = new String[xSizeASCII][ySizeASCII];
-		updated = generateASCIIGrid(xSizeASCII, ySizeASCII); // 9 x 9 ASCII Grid for a 4x4 Maze Grid
+		updated = generateASCIIGrid(); // 9 x 9 ASCII Grid for a 4x4 Maze Grid
 		System.out.println(xSizeASCII +"x"+ySizeASCII +" ASCII Grid for a "+ xSize+"x"+ySize
 							+" Maze Grid");
 		
 		//Access the inputed cell[][] and check each cell's walls
-		for(int x=0; x<arr.length; x++){
-			for(int y=0; y<arr[x].length; y++){
-				int xASCII = (arr[x][y].getX()*2)+1;
-				int yASCII = (arr[x][y].getY()*2)+1;
-				if(arr[x][y].getNorthWall()==false){ //no special cases, all walls can be broken down
+		for(int x=0; x<cellArray.length; x++){
+			for(int y=0; y<cellArray[x].length; y++){
+				xASCII = (cellArray[x][y].getX()*2)+1;
+				yASCII = (cellArray[x][y].getY()*2)+1;
+				if(cellArray[x][y].getNorthWall()==false){ //no special cases, all walls can be broken down
 //					System.out.println("North, x: "+xASCII+", y: "+yASCII);
 					if((updated[xASCII-1][yASCII])=="-"){
 						System.out.println("Truee");
 						updated[xASCII-1][yASCII] = " ";	
 					}
 				}
-				if(arr[x][y].getEastWall()==false){ //Right Perimeter walls can't be broken down.
-					if(arr[x][y] == arr[x][arr[x].length-1]){
+				if(cellArray[x][y].getEastWall()==false){ //Right Perimeter walls can't be broken down.
+					if(cellArray[x][y] == cellArray[x][cellArray[x].length-1]){
 						System.out.println("Yo that can't be broken down bro");
 					}
 					if((updated[xASCII][yASCII+1])=="|"){
 						updated[xASCII][yASCII+1] = " ";	
 					}
 				}
-				if(arr[x][y].getSouthWall()==false){ //no special cases, ""
+				if(cellArray[x][y].getSouthWall()==false){ //no special cases, ""
 					if((updated[xASCII+1][yASCII])=="-"){
 						updated[xASCII+1][yASCII] = " ";	
 					}
 				}
-				if(arr[x][y].getWestWall()==false){ //Left perimeter walls can't be broken down.
-					if(arr[x][y] == arr[x][0]){
+				if(cellArray[x][y].getWestWall()==false){ //Left perimeter walls can't be broken down.
+					if(cellArray[x][y] == cellArray[x][0]){
 						System.out.println("Nope, not this wall");
 						updated[xASCII][yASCII-1] = "X";
 					}

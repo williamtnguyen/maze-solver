@@ -7,7 +7,7 @@ public class MazeTester {
 		
 		ASCIIGrid a = new ASCIIGrid(4,4);
 		
-		String[][] maze=a.generateASCIIGrid(4, 4); //Change the size with these numbers
+		String[][] maze=a.generateASCIIGrid(); //Change the size with these numbers
 		
 		Cell[][] c= new Cell[4][4];
 
@@ -17,13 +17,18 @@ public class MazeTester {
 				c[x][y] = new Cell(x,y);
 			}
 		}
+
 		c[0][0].northPath();
 		c[0][0].southPath();
 		c[1][0].eastPath();
 		c[1][1].southPath();
 		c[2][1].westPath();
 		c[2][0].westPath();
-		String[][] updatedMaze = a.updateASCIIGrid(4, 4, c);
+		
+		ASCIIGrid b = new ASCIIGrid(4,4,c);
+
+		String[][] updatedMaze = b.updateASCIIGrid();
+		
 		p.printMaze(updatedMaze);
 		
 //		p.printMaze(maze);
