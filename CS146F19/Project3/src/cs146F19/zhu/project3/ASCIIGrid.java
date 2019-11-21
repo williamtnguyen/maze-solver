@@ -22,8 +22,8 @@ public class ASCIIGrid {
 		int xSizeASCII=(xSize*2)+1;
 		int ySizeASCII=(ySize*2)+1;
 		array = new String[xSizeASCII][ySizeASCII]; // 9 x 9 ASCII Grid for a 4x4 Maze Grid
-		System.out.println(xSizeASCII +"x"+ySizeASCII +" ASCII Grid for a "+ xSize+"x"+ySize
-							+" Maze Grid");
+//		System.out.println(xSizeASCII +"x"+ySizeASCII +" ASCII Grid for a "+ xSize+"x"+ySize
+//							+" Maze Grid");
 		for(int x=0; x<xSizeASCII; x++){
 			for(int y=0; y<ySizeASCII; y++){
 				if(x%2==0){ //Even Rows
@@ -44,6 +44,54 @@ public class ASCIIGrid {
 				}
 			}
 		}
+		return array;
+	}
+	
+	public String[][] updateASCIIGrid(int xSize, int ySize, Cell[][] arr){
+		int xSizeASCII=(xSize*2)+1;
+		int ySizeASCII=(ySize*2)+1;
+		String[][] updated = new String[xSizeASCII][ySizeASCII];
+		updated = generateASCIIGrid(xSizeASCII, ySizeASCII); // 9 x 9 ASCII Grid for a 4x4 Maze Grid
+		System.out.println(xSizeASCII +"x"+ySizeASCII +" ASCII Grid for a "+ xSize+"x"+ySize
+							+" Maze Grid");
+		
+		//Access the inputed cell[][] and check each cell's walls
+		for(int x=0; x<arr.length; x++){
+			for(int y=0; y<arr[x].length; y++){
+				int xASCII = (arr[x][y].getX()*2)+1;
+				int yASCII = (arr[x][y].getY()*2)+1;
+				if(arr[x][y].getNorthWall()==false){ //no special cases, all walls can be broken down
+//					System.out.println("North, x: "+xASCII+", y: "+yASCII);
+					if((updated[xASCII-1][yASCII])=="-"){
+						System.out.println("Truee");
+						updated[xASCII-1][yASCII] = " ";	
+					}
+				}
+				if(arr[x][y].getEastWall()==false){ //Right Perimeter walls can't be broken down.
+					if(arr[x][y] == arr[x][arr[x].length-1]){
+						System.out.println("Yo that can't be broken down bro");
+					}
+					if((updated[xASCII][yASCII+1])=="|"){
+						updated[xASCII][yASCII+1] = " ";	
+					}
+				}
+				if(arr[x][y].getSouthWall()==false){ //no special cases, ""
+					if((updated[xASCII+1][yASCII])=="-"){
+						updated[xASCII+1][yASCII] = " ";	
+					}
+				}
+				if(arr[x][y].getWestWall()==false){ //Left perimeter walls can't be broken down.
+					if(arr[x][y] == arr[x][0]){
+						System.out.println("Nope, not this wall");
+						updated[xASCII][yASCII-1] = "X";
+					}
+					else if((updated[xASCII][yASCII-1])=="|"){
+						updated[xASCII][yASCII-1] = " ";	
+					}
+				}
+			}
+		}
+		
 		return array;
 	}
 }

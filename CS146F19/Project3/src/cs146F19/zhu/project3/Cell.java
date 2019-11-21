@@ -36,6 +36,22 @@ public class Cell {
     public boolean allWallsIntact() {
         return (northWall && eastWall && southWall && westWall);
     }
+    
+    public boolean getNorthWall(){
+    	return this.northWall;
+    }
+    
+    public boolean getEastWall(){
+    	return this.eastWall;
+    }
+    
+    public boolean getSouthWall(){
+    	return this.southWall;
+    }
+    
+    public boolean getWestWall(){
+    	return this.westWall;
+    }
 
 
 }
