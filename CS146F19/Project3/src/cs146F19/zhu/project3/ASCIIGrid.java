@@ -65,6 +65,7 @@ public class ASCIIGrid {
 	}
 	
 	public String[][] updateASCIIGrid(){
+		int traverseCount=0;
 		String[][] updated = new String[xSizeASCII][ySizeASCII];
 		updated = generateASCIIGrid(); // 9 x 9 ASCII Grid for a 4x4 Maze Grid
 		System.out.println(xSizeASCII +"x"+ySizeASCII +" ASCII Grid for a "+ xSize+"x"+ySize
@@ -75,6 +76,15 @@ public class ASCIIGrid {
 			for(int y=0; y<cellArray[x].length; y++){
 				xASCII = (cellArray[x][y].getX()*2)+1;
 				yASCII = (cellArray[x][y].getY()*2)+1;
+				
+				if(traverseCount<=9){
+					updated[xASCII][yASCII]=Integer.toString(traverseCount);
+				}
+				else{
+					traverseCount=0;
+					updated[xASCII][yASCII]=Integer.toString(traverseCount);
+
+				}
 				if(cellArray[x][y].getNorthWall()==false){ //no special cases, all walls can be broken down
 //					System.out.println("North, x: "+xASCII+", y: "+yASCII);
 					if((updated[xASCII-1][yASCII])=="-"){
@@ -104,10 +114,18 @@ public class ASCIIGrid {
 						updated[xASCII][yASCII-1] = " ";	
 					}
 				}
+				traverseCount++;
 			}
 		}
 		
 		return array;
+	}
+	
+	public String[][] updateASCIIGridWithPath(){ 
+		//Traverse the ASCII Grid using some list?
+		//Or in the cell class, make a traversal int to keep track and just use the
+		//method before.
+		return null;
 	}
 }
 
