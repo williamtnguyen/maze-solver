@@ -4,10 +4,10 @@
  */
 public class ASCIIGrid {
     //In an ASCII Grid, you'll include all the walls, actual cells, and corners
-    //Rows...if n%2 = 0, "+-+-+-+" top/bottom walls and corners
-    //    ...if n%2 = 1, "|.|.|.|" left/right walls and cells
-    //Cols...if n%2 = 0, "+|+|+|+" corners, left/right walls
-    //    ...if n%2 = 1, "-.-.-.-" top/bottom walls, cells
+    //Rows...if n %2  = 0, "+-+-+-+" top/bottom walls and corners
+    //    ...if n % 2 = 1, "|.|.|.|" left/right walls and cells
+    //Cols...if n % 2 = 0, "+|+|+|+" corners, left/right walls
+    //    ...if n % 2 = 1, "-.-.-.-" top/bottom walls, cells
 
     //Special case for first and last row/col cells. So if cell 1, can't remove left wall... etc.
 
@@ -129,10 +129,8 @@ public class ASCIIGrid {
         return updatedGrid;
     }
 
+    // TODO
     public String[][] updateASCIIGridWithPath(){
-        //Traverse the ASCII Grid using some list?
-        //Or in the cell class, make a traversal int to keep track and just use the
-        //method before.
         return null;
     }
 }
