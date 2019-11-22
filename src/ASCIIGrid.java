@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * ASCII Representation of Maze Cell[][] grid
  * Written by: Justin Zhu
@@ -130,7 +132,7 @@ public class ASCIIGrid {
     }
 
     // TODO
-    public String[][] updateASCIIGridWithPath(){
+    public String[][] updateASCIIGridWithPath(ArrayList<Cell> visitOrder){
         return null;
     }
 }
