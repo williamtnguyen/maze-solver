@@ -1,5 +1,6 @@
 /**
  * Data Structure to hold the x & y coordinates of a cell
+ * Written By: William Nguyen
  */
 public class Cell {
     // X & Y coordinates
@@ -22,6 +23,10 @@ public class Cell {
     // Standard accessor methods
     public int getX() { return this.x; }
     public int getY() { return this.y; }
+    public boolean getNorthWall() { return this.northWall; }
+    public boolean getEastWall() { return this.eastWall; }
+    public boolean getSouthWall() { return this.southWall; }
+    public boolean getWestWall() { return this.westWall; }
 
     // Standard mutator methods for intact walls
     // Theoretically, once a wall is knocked down, it does not change

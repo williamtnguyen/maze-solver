@@ -1,7 +1,9 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
- * A Maze represented with a 2D Array of Cells (holding x & y coordinates),
+ * A Maze represented with a 2D Array of Cells (holding x & y coordinates)
+ * Written By: William Nguyen
  */
 public class Maze {
     // 2D Array of Cells starts off as a Grid
@@ -32,6 +34,7 @@ public class Maze {
             // Finding all neighbors of currCell with ALL WALLS INTACT
             ArrayList<Cell> neighbors = findAdjacentNeighbors(currCell);
             for(Cell neighbor : neighbors) {
+                // checking for all walls intact ensures we don't revisit nodes
                 if(!neighbor.allWallsIntact()) { neighbors.remove(neighbor); }
             }
             // If 1 or more are found, choose a Cell at random and knock down wall between it and currCell
@@ -52,21 +55,25 @@ public class Maze {
     /**
      * DFS Iterative Solution
      */
-    public void solveDFS() {
-        // Stack eliminates recursion: holds cell locations
+    public ArrayList<Cell> solveDFS() {
+        // Stack eliminates recursion: holds cell locations, DFS nature calls for LIFO order
         Stack<Cell> cellStack = new Stack<>();
-        Cell currCell = this.grid[0][0]; // initially the starting cell
-        Cell finish = this.grid[numVertices - 1][numVertices - 1];
         ArrayList<Cell> visitOrder = new ArrayList<>();
+
+        // Starting & Endpoints
+        Cell currCell = this.grid[0][0];
+        Cell finish = this.grid[numVertices - 1][numVertices - 1];
         visitOrder.add(currCell); // first to be visited
 
         Random r = new Random(); // set seed here for testing
         // The goal is not to visit all nodes, but rather to reach the finishing Cell
         while(!currCell.equals(finish)) {
-            // Finding all neighbors of currCell that have edges between them
+            // Finding all neighbors of currCell that have edges between them and haven't been visited yet
             ArrayList<Cell> neighbors = findAdjacentNeighbors(currCell);
             for(Cell neighbor : neighbors) {
-                if(!currCell.hasEdge(neighbor)) { neighbors.remove(neighbor); }
+                if((!currCell.hasEdge(neighbor)) || visitOrder.contains(neighbor)) {
+                    neighbors.remove(neighbor);
+                }
             }
             // If 1 or more are found, choose a Cell at random, add it to visitOrder, and make it the new currCell
             if(!neighbors.isEmpty()) {
@@ -80,13 +87,44 @@ public class Maze {
                 currCell = cellStack.pop();
             }
         }
+        return visitOrder;
     }
 
     /**
      * BFS Iterative Solution
      */
-    public void solveBFS() {
+    public ArrayList<Cell> solveBFS() {
+        // BFS nature calls for FIFO order
+        Queue<Cell> cellQueue = new LinkedList<>();
+        ArrayList<Cell> visitOrder = new ArrayList<>();
 
+        // Starting & Endpoints
+        Cell currCell = this.grid[0][0];
+        Cell finish = this.grid[this.numVertices - 1][this.numVertices - 1];
+        visitOrder.add(currCell);
+
+        Random r = new Random();
+        while(!currCell.equals(finish)) {
+            ArrayList<Cell> neighbors = findAdjacentNeighbors(currCell);
+            // Finding all neighbors of currCell that have edges between them and haven't been visited yet
+            for(Cell neighbor : neighbors) {
+                if((!currCell.hasEdge(neighbor)) || visitOrder.contains(neighbor)) {
+                    neighbors.remove(neighbor);
+                }
+            }
+            // If 1 or more are found, choose a Cell at random, add it to visitOrder, and make it the new currCell
+            if(!neighbors.isEmpty()) {
+                Cell neighbor = neighbors.get(r.nextInt(neighbors.size() - 1));
+                cellQueue.add(neighbor);
+                currCell = neighbor;
+                visitOrder.add(currCell);
+            }
+            else {
+                // "dequeue" the queue and backtrack
+                currCell = cellQueue.poll();
+            }
+        }
+        return visitOrder;
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
@@ -158,4 +196,8 @@ public class Maze {
             cell2.westPath();
         }
     }
+
+    // Standard Accessor methods for encapsulation
+    public int getNumVertices() { return this.numVertices; }
+    public Cell[][] getGrid() { return this.grid; }
 }
