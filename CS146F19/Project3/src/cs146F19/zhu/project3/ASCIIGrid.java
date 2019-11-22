@@ -193,4 +193,24 @@ public class ASCIIGrid {
 		}
 		return shortestPathGridASCII;
 	}
+	
+//	public void printPath(ArrayList<Cell> shortestPath){
+//		
+//	}
+	
+	/**
+	 *Standard getter methods
+	 * @return
+	 */
+	public String[][] getGridASCII(){
+		return gridASCII;
+	}
+	
+	public String[][] getShortestPathASCII(){
+		return shortestPathGridASCII;
+	}
+	
+	public String[][] getTraversalPathASCII(){
+		return traversalPathGridASCII;
+	}
 }

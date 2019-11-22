@@ -85,6 +85,7 @@ public class MazeTester {
 
 //		System.out.println(xSizeASCII + "x" + ySizeASCII + " ASCII Grid for a " + xSize + "x" + ySize + " Maze Grid");
 
+
 		
 	}
 	
