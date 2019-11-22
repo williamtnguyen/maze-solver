@@ -75,11 +75,11 @@ public class ASCIIGrid {
 	 *
 	 * @return
 	 */
-	public String[][] updateASCIIGrid() {
-		int traverseCount = 0;
+	public String[][] updateASCIIGridWalls() { //generates a base grid based on size of maze
+											   //updates the cell walls based on maze's cell grid
 		String[][] updatedGrid = generateASCIIGrid();
 
-		System.out.println(xSizeASCII + "x" + ySizeASCII + " ASCII Grid for a " + xSize + "x" + ySize + " Maze Grid");
+//		System.out.println(xSizeASCII + "x" + ySizeASCII + " ASCII Grid for a " + xSize + "x" + ySize + " Maze Grid");
 
 		// Access the inputted cell[][] and check each cell's walls
 		for (int x = 0; x < grid.length; x++) {
@@ -87,13 +87,6 @@ public class ASCIIGrid {
 				int xASCII = (grid[x][y].getX() * 2) + 1;
 				int yASCII = (grid[x][y].getY() * 2) + 1;
 
-				if (traverseCount <= 9) {
-					updatedGrid[xASCII][yASCII] = Integer.toString(traverseCount);
-				} else {
-					traverseCount = 0;
-					updatedGrid[xASCII][yASCII] = Integer.toString(traverseCount);
-
-				}
 				// No special cases, all walls can be broken down
 				if (grid[x][y].getNorthWall() == false) {
 					// System.out.println("North, x: "+xASCII+", y: "+yASCII);
@@ -105,9 +98,11 @@ public class ASCIIGrid {
 				// Right Perimeter walls can't be broken down.
 				if (grid[x][y].getEastWall() == false) {
 					if (grid[x][y] == grid[x][grid[x].length - 1]) {
-						System.out.println("Yo that can't be broken down bro");
+//						System.out.println("Yo that can't be broken down bro");
+						updatedGrid[xASCII][yASCII + 1] = "X";
+
 					}
-					if ((updatedGrid[xASCII][yASCII + 1]) == "|") {
+					else if ((updatedGrid[xASCII][yASCII + 1]) == "|") {
 						updatedGrid[xASCII][yASCII + 1] = " ";
 					}
 				}
@@ -121,24 +116,23 @@ public class ASCIIGrid {
 															// can't be broken
 															// down.
 					if (grid[x][y] == grid[x][0]) {
-						System.out.println("Nope, not this wall");
+//						System.out.println("Nope, not this wall");
 						updatedGrid[xASCII][yASCII - 1] = "X";
 					} else if ((updatedGrid[xASCII][yASCII - 1]) == "|") {
 						updatedGrid[xASCII][yASCII - 1] = " ";
 					}
 				}
-				traverseCount++;
 			}
 		}
 		return updatedGrid;
 	}
 
 	// TODO
-	public String[][] updateASCIIGridWithPath(ArrayList<Cell> visitOrder) {
+	public String[][] updateASCIIGridWithTraversalPath(ArrayList<Cell> visitOrder) {
 		int traverseCount = 0;
-		String[][] updatedGrid = generateASCIIGrid();
+		String[][] updatedGrid = updateASCIIGridWalls();
 
-		System.out.println(xSizeASCII + "x" + ySizeASCII + " ASCII Grid for a " + xSize + "x" + ySize + " Maze Grid");
+//		System.out.println(xSizeASCII + "x" + ySizeASCII + " ASCII Grid for a " + xSize + "x" + ySize + " Maze Grid");
 		for (int i = 0; i < visitOrder.size(); i++) {
 			int xASCII = (visitOrder.get(i).getX() * 2) + 1;
 			int yASCII = (visitOrder.get(i).getY() * 2) + 1;
@@ -150,43 +144,23 @@ public class ASCIIGrid {
 				updatedGrid[xASCII][yASCII] = Integer.toString(traverseCount);
 
 			}
-			// No special cases, all walls can be broken down
-			if (visitOrder.get(i).getNorthWall() == false) {
-				// System.out.println("North, x: "+xASCII+", y: "+yASCII);
-				if ((updatedGrid[xASCII - 1][yASCII]) == "-") {
-					System.out.println("Truee");
-					updatedGrid[xASCII - 1][yASCII] = " ";
-				}
-			}
-			// Right Perimeter walls can't be broken down.
-			if (visitOrder.get(i).getEastWall() == false) {
-//				System.out.println(maze.getNumVertices());
-				if (visitOrder.get(i).getY() == xSize-1) {
-					System.out.println("Yo that can't be broken down bro");
-					updatedGrid[xASCII][yASCII + 1] = "X";
-
-				}
-			else if ((updatedGrid[xASCII][yASCII + 1]) == "|") {
-					updatedGrid[xASCII][yASCII + 1] = " ";
-				}
-			}
-			if (visitOrder.get(i).getSouthWall() == false) { // no special cases, ""
-				if ((updatedGrid[xASCII + 1][yASCII]) == "-") {
-					updatedGrid[xASCII + 1][yASCII] = " ";
-				}
-			}
-			if (visitOrder.get(i).getWestWall() == false) { // Left perimeter walls
-														// can't be broken down.
-				if (visitOrder.get(i).getY() == 0) {
-					System.out.println("Nope, not this wall");
-					updatedGrid[xASCII][yASCII - 1] = "X";
-				} else if ((updatedGrid[xASCII][yASCII - 1]) == "|") {
-					updatedGrid[xASCII][yASCII - 1] = " ";
-				}
-			}
 			traverseCount++;
 		}
 		return updatedGrid;
 	}
-	
+
+	public String[][] updateASCIIGridWithShortestPath(ArrayList<Cell> shortestPath) {
+		String[][] updatedGrid = updateASCIIGridWalls();
+
+//		System.out.println(xSizeASCII + "x" + ySizeASCII + " ASCII Grid for a " + xSize + "x" + ySize + " Maze Grid");
+
+		for (int i = 0; i < shortestPath.size(); i++) {
+			int xASCII = (shortestPath.get(i).getX() * 2) + 1;
+			int yASCII = (shortestPath.get(i).getY() * 2) + 1;
+			
+			updatedGrid[xASCII][yASCII] = "#";
+		
+		}
+		return updatedGrid;
+	}
 }
