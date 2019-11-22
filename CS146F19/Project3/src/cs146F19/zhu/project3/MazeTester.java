@@ -74,6 +74,7 @@ public class MazeTester {
 		Maze m = new Maze(4, c);
 //		System.out.println(m.getNumVertices());
 		ASCIIGrid grid = new ASCIIGrid(m);
+		
 		System.out.println("Grid with broken walls");
 		String[][] test = grid.updateASCIIGridWalls();
 		p.printMaze(test);
@@ -82,7 +83,8 @@ public class MazeTester {
 		String[][] test1 = grid.updateASCIIGridWithShortestPath(arr);
 		p.printMaze(test1);
 
-		
+//		System.out.println(xSizeASCII + "x" + ySizeASCII + " ASCII Grid for a " + xSize + "x" + ySize + " Maze Grid");
+
 		
 	}
 	
