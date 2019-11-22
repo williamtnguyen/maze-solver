@@ -10,6 +10,7 @@ public class MazeTest {
 
     @Test
     public void generateMaze() {
+        maze.generateMaze();
     }
 
     @Test

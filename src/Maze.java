@@ -14,7 +14,7 @@ public class Maze {
     public Maze(int numVertices) {
         this.numVertices = numVertices;
 
-        // Initializing & filling the grid with Cells of proper information
+        // Initializing & filling the grid with Cells with all walls up
         grid = new Cell[this.numVertices][this.numVertices];
         fillGrid(this.grid);
     }
@@ -27,19 +27,17 @@ public class Maze {
         Stack<Cell> cellStack = new Stack<>();
         int totalCells = (this.numVertices * this.numVertices);
         Cell currCell = this.grid[0][0]; // initially the starting cell
+        cellStack.push(currCell);
         int visitedCells = 1;
 
         Random r = new Random(); // set seed here for testing
         while(visitedCells < totalCells) {
             // Finding all neighbors of currCell with ALL WALLS INTACT
             ArrayList<Cell> neighbors = findAdjacentNeighbors(currCell);
-            for(Cell neighbor : neighbors) {
-                // checking for all walls intact ensures we don't revisit nodes
-                if(!neighbor.allWallsIntact()) { neighbors.remove(neighbor); }
-            }
+
             // If 1 or more are found, choose a Cell at random and knock down wall between it and currCell
             if(!neighbors.isEmpty()) {
-                Cell neighbor = neighbors.get(r.nextInt(neighbors.size() - 1));
+                Cell neighbor = neighbors.get(r.nextInt(neighbors.size()));
                 addEdge(currCell, neighbor);
                 cellStack.push(currCell);
                 currCell = neighbor;
@@ -77,7 +75,7 @@ public class Maze {
             }
             // If 1 or more are found, choose a Cell at random, add it to visitOrder, and make it the new currCell
             if(!neighbors.isEmpty()) {
-                Cell neighbor = neighbors.get(r.nextInt(neighbors.size() - 1));
+                Cell neighbor = neighbors.get(r.nextInt(neighbors.size()));
                 cellStack.push(currCell);
                 currCell = neighbor;
                 visitOrder.add(currCell);
@@ -162,7 +160,7 @@ public class Maze {
         for(int i  = startPosX; i <= endPosX; i++) {
             for(int j = startPosY; j <= endPosY; j++) {
                 // adding to a list of cells so that we can keep track of neighbor coordinates
-                if(i != cell.getX() && j != cell.getY()) {
+                if(i != cell.getX() && j != cell.getY() && this.grid[i][j].allWallsIntact()) {
                     neighbors.add(this.grid[i][j]);
                 }
             }
