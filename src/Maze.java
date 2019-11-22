@@ -173,25 +173,27 @@ public class Maze {
     // Emulates knocking down a wall between 2 cells
     public void addEdge(Cell cell1, Cell cell2) {
 
-        // East/West Edge: Cell2 precedes Cell1
-        if((cell1.getX() - 1) == cell2.getX()) {
-            cell1.westPath();
-            cell2.eastPath();
-        }
-        // East/West Edge: Cell1 precedes Cell2
-        else if((cell1.getX() + 1) == cell2.getX()) {
-            cell1.eastPath();
-            cell2.westPath();
-        }
+        /* Although we call it "X", we determine "X" as "i" in the loop, which dictates rows (y-index) */
+
         // North/South Edge: Cell2 is above Cell1
-        else if((cell1.getY() - 1) == cell2.getY()) {
+        if((cell1.getX() - 1) == cell2.getX()) {
             cell1.northPath();
             cell2.southPath();
         }
         // North/South Edge: Cell1 is above Cell2
-        else if((cell1.getY() + 1) == cell2.getY()) {
+        else if((cell1.getX() + 1) == cell2.getX()) {
             cell1.southPath();
             cell2.northPath();
+        }
+        // East/West Edge: Cell2 precedes Cell1
+        else if((cell1.getY() - 1) == cell2.getY()) {
+            cell1.westPath();
+            cell2.eastPath();
+        }
+        // East/West Edge: Cell1 precedes Cell2
+        else if((cell1.getY() + 1) == cell2.getY()) {
+            cell1.eastPath();
+            cell2.westPath();
         }
     }
 

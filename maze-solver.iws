@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8552b342-0b2e-4e51-93ba-b451b4025227" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ASCIIGridTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MazeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maze-solver.iml" beforeDir="false" afterPath="$PROJECT_DIR$/maze-solver.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maze-solver.iws" beforeDir="false" afterPath="$PROJECT_DIR$/maze-solver.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Maze.java" afterDir="false" />
-    </list>
+    <list default="true" id="8552b342-0b2e-4e51-93ba-b451b4025227" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +40,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.MazeTest.findAdjacentNeighbors">
+  <component name="RunManager" selected="JUnit.MazeTest.addEdge">
     <configuration name="MazeTest.addEdge" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="maze-solver" />
       <option name="PACKAGE_NAME" value="" />
@@ -69,8 +63,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.MazeTest.findAdjacentNeighbors" />
         <item itemvalue="JUnit.MazeTest.addEdge" />
+        <item itemvalue="JUnit.MazeTest.findAdjacentNeighbors" />
       </list>
     </recent_temporary>
   </component>

@@ -24,6 +24,7 @@ public class MazeTest {
     public void findAdjacentNeighbors() {
     }
 
+    /* Works as expected */
     @Test
     public void addEdge() {
         Cell test1 = grid[0][0];
@@ -33,7 +34,10 @@ public class MazeTest {
         maze.addEdge(test1, test2);
         maze.addEdge(test2, test3);
 
-        assertFalse(test2.getNorthWall()); // test2 Cell has an edge with test1 Cell in North direction
-        assertFalse(test2.getSouthWall()); // test2 Cell has an edge with test3 Cell in South direction
+        assertTrue(test1.getWestWall());
+        assertFalse(test1.getEastWall());
+        assertFalse(test2.getWestWall()); // test2 Cell has an edge with test1 Cell in West direction
+        assertFalse(test2.getEastWall()); // test2 Cell has an edge with test3 Cell in East direction
+        assertTrue(test3.getEastWall());
     }
 }
