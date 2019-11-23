@@ -34,21 +34,24 @@ public class ASCIIGridTest {
         // Call this after "maze.generateMaze()" because that updates the ASCII grid with knocked down walls
         asciiGrid.updateASCIIGridWalls();
 
+        System.out.println("Grid with broken walls");
+        p.printMaze(asciiGrid.getGridASCII());
+        
         // ArrayLists containing the visit order of the traversal. Only test one at a time, this is just for example
-//        ArrayList<Cell> dfsVisitOrder = maze.solveDFS();
+        ArrayList<Cell> dfsVisitOrder = maze.solveDFS();
 //        ArrayList<Cell> bfsVisitOrder = maze.solveBFS();
 
-//        asciiGrid.updateASCIIGridWithTraversalPath(dfsVisitOrder);
+        asciiGrid.updateASCIIGridWithTraversalPath(dfsVisitOrder);
+//      asciiGrid.updateASCIIGridWithShortestPath(dfsShortestPath);
 
 //        // Todo: print accordingly
-//        System.out.println("Grid with broken walls");
-//        p.printMaze(asciiGrid.getGridASCII());
-//
-//        System.out.println("Grid with broken walls");
+
+
+//        System.out.println("Grid with shortest path");
 //        p.printMaze(asciiGrid.getShortestPathASCII());
-//
-//        System.out.println("Traversal Path");
-//        p.printMaze(asciiGrid.getTraversalPathASCII());
+
+        System.out.println("Traversal Path");
+        p.printMaze(asciiGrid.getTraversalPathASCII());
     }
 
 //    @Test

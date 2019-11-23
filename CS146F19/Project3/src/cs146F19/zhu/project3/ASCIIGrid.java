@@ -86,7 +86,9 @@ public class ASCIIGrid {
 		// If prior step of generating was skipped
 		if (gridASCII == null)
 			gridASCII = generateASCIIGrid();
-
+		//Special case where top left wall and bottom right wall are the entrance/exits
+		gridASCII[0][1] = " ";
+		gridASCII[gridASCII.length-1][gridASCII[0].length-2] = " ";
 		// Access the inputted cell[][] and check each cell's walls
 		for (int x = 0; x < grid.length; x++) {
 			for (int y = 0; y < grid[x].length; y++) {
