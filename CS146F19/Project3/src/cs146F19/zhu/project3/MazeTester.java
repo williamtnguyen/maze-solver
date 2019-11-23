@@ -43,8 +43,7 @@ public class MazeTester {
 //		y.eastPath();
 //		u.southPath();
 		
-		x.eastPath();
-		z.westPath();
+
 	
 		arr.add(q);
 		arr.add(w);
@@ -64,33 +63,33 @@ public class MazeTester {
 			}
 		}
 		
-		c[0][0].northPath();
-		c[0][0].southPath();
-		c[1][0].eastPath();
-		c[1][1].southPath();
-		c[2][1].westPath();
-		c[2][0].westPath();		
-		
-		Maze m = new Maze(4, c);
+//		c[0][0].northPath();
+//		c[0][0].southPath();
+//		c[1][0].eastPath();
+//		c[1][1].southPath();
+//		c[2][1].westPath();
+//		c[2][0].westPath();		
+//		
+//		Maze m = new Maze(4, c);
 //		System.out.println(m.getNumVertices());
-		ASCIIGrid grid = new ASCIIGrid(m);
+//		ASCIIGrid grid = new ASCIIGrid(m);
 		
-		System.out.println("Grid with broken walls");
-		String[][] test = grid.updateASCIIGridWalls();
-		p.printMaze(test);
-
-		System.out.println("Traversal Path");
-		String[][] test1 = grid.updateASCIIGridWithTraversalPath(arr);
-		p.printMaze(test1);
-		
-		System.out.println("Traversal Path");
-		String[][] test2 = grid.updateASCIIGridWithShortestPath(arr);
-		p.printMaze(test2);
-
-		grid.printPath(arr);
-		grid.printLength(arr); //Total length
-		grid.printVisited(arr); //Total visited, should be different arrays
-//		System.out.println(xSizeASCII + "x" + ySizeASCII + " ASCII Grid for a " + xSize + "x" + ySize + " Maze Grid");
+//		System.out.println("Grid with broken walls");
+//		String[][] test = grid.updateASCIIGridWalls();
+//		p.printMaze(test);
+//
+//		System.out.println("Traversal Path");
+//		String[][] test1 = grid.updateASCIIGridWithTraversalPath(arr);
+//		p.printMaze(test1);
+//		
+//		System.out.println("Traversal Path");
+//		String[][] test2 = grid.updateASCIIGridWithShortestPath(arr);
+//		p.printMaze(test2);
+//
+//		grid.printPath(arr);
+//		grid.printLength(arr); //Total length
+//		grid.printVisited(arr); //Total visited, should be different arrays
+////		System.out.println(xSizeASCII + "x" + ySizeASCII + " ASCII Grid for a " + xSize + "x" + ySize + " Maze Grid");
 
 
 		

@@ -1,72 +1,104 @@
+package cs146F19.zhu.project3;
+
+import java.util.ArrayList;
+
 /**
  * Data Structure to hold the x & y coordinates of a cell
  * Written By: William Nguyen
  */
-
-package cs146F19.zhu.project3;
-
 public class Cell {
     // X & Y coordinates
     private final int x, y;
-    // Explicitly keeping track if there are neighbors in North, East, South, West directions
-    private boolean northWall, eastWall, southWall, westWall;
+    // neighbors is all valid neighbors, connections is edge relationships
+    private ArrayList<Cell> neighbors, connections;
+
 
     public Cell(int x, int y) {
         // Theoretically, once x and y is set, it does not change
         this.x = x;
         this.y = y;
 
-        // Initially, every cells walls are intact
-        this.northWall = true;
-        this.eastWall = true;
-        this.southWall = true;
-        this.westWall = true;
+        // Instantiate neighbor and connection fields, will be modified in Maze class
+        this.neighbors = new ArrayList<>();
+        /* NOTE: "Index : NeighborDirection" = { 0:North, 1:East, 2:South, 3:West } */
+        this.connections = new ArrayList<>();
     }
+
 
     // Standard accessor methods
     public int getX() { return this.x; }
     public int getY() { return this.y; }
-    public boolean getNorthWall() { return this.northWall; }
-    public boolean getEastWall() { return this.eastWall; }
-    public boolean getSouthWall() { return this.southWall; }
-    public boolean getWestWall() { return this.westWall; }
-    public boolean getCoords(int x, int y){
-    	return (this.x == x) && (this.y==y); 
-    }
+    public ArrayList<Cell> getNeighbors() { return this.neighbors; }
+    public ArrayList<Cell> getConnections() { return this.connections; }
 
-    // Standard mutator methods for intact walls
-    // Theoretically, once a wall is knocked down, it does not change
-    public void northPath() { this.northWall = false; }
-    public void eastPath() { this.eastWall = false; }
-    public void southPath() { this.southWall = false; }
-    public void westPath() { this.westWall = false; }
 
-    // Tells whether or not all walls are intact
+    // Tells whether or not all walls are intact (i.e., connections field is empty)
     public boolean allWallsIntact() {
-        return (northWall && eastWall && southWall && westWall);
+        return this.connections.isEmpty();
     }
-
 
     // Tells whether or not there is an edge or "no wall" between this Cell and the neighbor
     public boolean hasEdge(Cell neighbor) {
-        // North/South Edge: Neighbor cell is above this Cell
+        // Is this edge and the neighbor param apart of eachother's connections field?
+        return this.connections.contains(neighbor) && neighbor.getConnections().contains(this);
+    }
+
+
+    // Adds a neighbor Cell into "this" Cell's neighbor list in the valid index location
+    public void addNeighbor(Cell neighbor) {
+        /* Although we call it "X", we determine "X" as "i" in the loop, which dictates rows (y-index) */
+
+        // North/South neighbor: Neighbor is above "this" Cell
         if((this.getX() - 1) == neighbor.getX()) {
-            return this.northWall && neighbor.southWall;
+            this.neighbors.add(neighbor);
+            neighbor.neighbors.add(this);
         }
-        // North/South Edge: This Cell is above Neighbor Cell
+        // North/South neighbor: "this" Cell is above Neighbor
         else if((this.getX() + 1) == neighbor.getX()) {
-            return this.southWall && neighbor.northWall;
+            this.neighbors.add(neighbor);
+            neighbor.neighbors.add(this);
         }
-        // East/West Edge: Neighbor Cell precedes this Cell
+        // East/West neighbor: Neighbor precedes "this" cell
         else if((this.getY() - 1) == neighbor.getY()) {
-            return this.westWall && neighbor.eastWall;
+            this.neighbors.add(neighbor);
+            neighbor.neighbors.add(this);
         }
-        // East/West Edge: This Cell precedes Neighbor Cell
+        // East/West neighbor: "this" Cell precedes Neighbor
         else if((this.getY() + 1) == neighbor.getY()) {
-            return this.eastWall && neighbor.westWall;
+            this.neighbors.add(neighbor);
+            neighbor.neighbors.add(this);
         }
-        // Otherwise, there is no edge between these cells
-        return false;
+    }
+
+    // Emulates knocking down a wall between 2 cells
+    public void addEdge(Cell neighbor) {
+        /* Although we call it "X", we determine "X" as "i" in the loop, which dictates rows (y-index) */
+
+        // North/South Edge: Neighbor is above "this" Cell
+        if((this.getX() - 1) == neighbor.getX()) {
+            this.connections.add( neighbor);
+            neighbor.connections.add(this);
+        }
+        // North/South Edge: "this" Cell is above Neighbor
+        else if((this.getX() + 1) == neighbor.getX()) {
+            this.connections.add(neighbor);
+            neighbor.connections.add(this);
+        }
+        // East/West Edge: Neighbor precedes "this" cell
+        else if((this.getY() - 1) == neighbor.getY()) {
+            this.connections.add(neighbor);
+            neighbor.connections.add(this);
+        }
+        // East/West Edge: "this" Cell precedes Neighbor
+        else if((this.getY() + 1) == neighbor.getY()) {
+            this.connections.add(neighbor);
+            neighbor.connections.add(this);
+        }
+
+        // nvm about this  vvv
+//        // Removing "this" Cell and Neighbor from eachother's neighbor list so we don't visit it again
+//        this.neighbors.remove(neighbor);
+//        neighbor.neighbors.remove(this);
     }
 
 
