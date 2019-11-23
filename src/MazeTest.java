@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class MazeTest {
 
-    Maze maze = new Maze(3);
+    Maze maze = new Maze(4);
     Cell[][] grid = maze.getGrid();
 
     /* Testing if the method compiles properly */
@@ -21,8 +21,8 @@ public class MazeTest {
         maze.generateMaze();
         List<Cell> visitOrder = maze.solveDFS();
         // Asserting DFS reached the finish point
-        assertEquals(2, visitOrder.get(visitOrder.size() - 1).getX());
-        assertEquals(2, visitOrder.get(visitOrder.size() - 1).getY());
+        assertEquals(3, visitOrder.get(visitOrder.size() - 1).getX());
+        assertEquals(3, visitOrder.get(visitOrder.size() - 1).getY());
         // Printing visit order
         for(Cell c : visitOrder) {
             System.out.println("X Coord: " + c.getX() + " Y Coord: " + c.getY());
@@ -34,8 +34,8 @@ public class MazeTest {
         maze.generateMaze();
         List<Cell> visitOrder = maze.solveBFS();
         // Asserting BFS reached the finish point
-        assertEquals(2, visitOrder.get(visitOrder.size() - 1).getX());
-        assertEquals(2, visitOrder.get(visitOrder.size() - 1).getY());
+        assertEquals(3, visitOrder.get(visitOrder.size() - 1).getX());
+        assertEquals(3, visitOrder.get(visitOrder.size() - 1).getY());
         for(Cell c : visitOrder) {
             System.out.println("X Coord: " + c.getX() + " Y Coord: " + c.getY());
         }

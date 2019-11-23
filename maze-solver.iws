@@ -2,18 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8552b342-0b2e-4e51-93ba-b451b4025227" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/CellTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maze-solver.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/maze-solver.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maze-solver.iws" beforeDir="false" afterPath="$PROJECT_DIR$/maze-solver.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/ASCIIGrid.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/maze-solver/ASCIIGridTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/ASCIIGridTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/maze-solver/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/Cell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/Maze.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/Maze.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/MazePrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/MazePrinter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/maze-solver/MazeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/MazeTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ASCIIGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ASCIIGrid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ASCIIGridTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ASCIIGridTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Maze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MazePrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MazePrinter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MazeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MazeTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,19 +56,22 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CellTest.hasEdge">
-    <configuration name="Maze" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Maze" />
+  <component name="RunManager" selected="JUnit.ASCIIGridTest.updateASCIIGridWithTraversalPath">
+    <configuration name="ASCIIGridTest.updateASCIIGridWalls" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="maze-solver" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ASCIIGridTest" />
+      <option name="METHOD_NAME" value="updateASCIIGridWalls" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CellTest.allWallsIntact" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ASCIIGridTest.updateASCIIGridWithTraversalPath" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="maze-solver" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="CellTest" />
-      <option name="METHOD_NAME" value="allWallsIntact" />
+      <option name="MAIN_CLASS_NAME" value="ASCIIGridTest" />
+      <option name="METHOD_NAME" value="updateASCIIGridWithTraversalPath" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -110,11 +109,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CellTest.hasEdge" />
-        <item itemvalue="JUnit.CellTest.allWallsIntact" />
-        <item itemvalue="JUnit.MazeTest.solveBFS" />
+        <item itemvalue="JUnit.ASCIIGridTest.updateASCIIGridWithTraversalPath" />
+        <item itemvalue="JUnit.ASCIIGridTest.updateASCIIGridWalls" />
         <item itemvalue="JUnit.MazeTest.solveDFS" />
-        <item itemvalue="Application.Maze" />
+        <item itemvalue="JUnit.MazeTest.solveBFS" />
+        <item itemvalue="JUnit.CellTest.hasEdge" />
       </list>
     </recent_temporary>
   </component>
