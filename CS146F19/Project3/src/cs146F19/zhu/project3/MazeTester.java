@@ -80,9 +80,16 @@ public class MazeTester {
 		p.printMaze(test);
 
 		System.out.println("Traversal Path");
-		String[][] test1 = grid.updateASCIIGridWithShortestPath(arr);
+		String[][] test1 = grid.updateASCIIGridWithTraversalPath(arr);
 		p.printMaze(test1);
+		
+		System.out.println("Traversal Path");
+		String[][] test2 = grid.updateASCIIGridWithShortestPath(arr);
+		p.printMaze(test2);
 
+		grid.printPath(arr);
+		grid.printLength(arr); //Total length
+		grid.printVisited(arr); //Total visited, should be different arrays
 //		System.out.println(xSizeASCII + "x" + ySizeASCII + " ASCII Grid for a " + xSize + "x" + ySize + " Maze Grid");
 
 

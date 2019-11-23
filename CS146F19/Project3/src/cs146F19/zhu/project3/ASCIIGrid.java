@@ -194,9 +194,26 @@ public class ASCIIGrid {
 		return shortestPathGridASCII;
 	}
 	
-//	public void printPath(ArrayList<Cell> shortestPath){
-//		
-//	}
+	/**
+	 *Get Path Coordinates, total length of path, total visited cells
+	 * @return
+	 */
+	public void printPath(ArrayList<Cell> shortestPath){
+		System.out.print("Path: ");
+		for(int i=0; i<shortestPath.size(); i++){
+			System.out.print("("+shortestPath.get(i).getX()+","+ shortestPath.get(i).getY()+") ");
+		}
+		System.out.println("");
+	}
+	
+	public void printLength(ArrayList<Cell> shortestPath){
+		System.out.println("Length of Shortest Path: "+ shortestPath.size());
+	}
+	
+	public void printVisited(ArrayList<Cell> visitOrder){
+		System.out.println("Visited Cells: "+visitOrder.size());
+		
+	}
 	
 	/**
 	 *Standard getter methods
