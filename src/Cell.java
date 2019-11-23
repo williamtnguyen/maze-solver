@@ -94,15 +94,16 @@ public class Cell {
         }
 
         // nvm about this  vvv
-//        // Removing "this" Cell and Neighbor from eachother's neighbor list so we don't visit it again
-//        this.neighbors.remove(neighbor);
-//        neighbor.neighbors.remove(this);
+        // Removing "this" Cell and Neighbor from eachother's neighbor list so we don't visit it again
+        this.neighbors.remove(neighbor);
+        neighbor.neighbors.remove(this);
     }
 
 
     // Equals/Hashcode contract
     @Override
     public boolean equals(Object x) {
+        if(this.getClass() != x.getClass()) { return false; }
         Cell that = (Cell)x;
         return this.getX() == that.getX() && this.getY() == that.getY();
     }

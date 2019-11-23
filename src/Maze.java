@@ -8,12 +8,15 @@ public class Maze {
     // 2D Array of Cells starts off as a grid
     private final int numVertices;
     private Cell[][] grid;
+    private final int totalCells;
+
 
 
     public Maze(int numVertices) {
         this.numVertices = numVertices;
         // Initializing & filling the grid with Cells with proper coordinates
         grid = new Cell[this.numVertices][this.numVertices];
+        totalCells = (this.numVertices * this.numVertices);
         fillGrid(this.grid);
     }
 
@@ -23,7 +26,6 @@ public class Maze {
     public void generateMaze() {
         // Stack eliminates recursion: holds cell locations
         Stack<Cell> cellStack = new Stack<>();
-        int totalCells = (this.numVertices * this.numVertices);
         Cell currCell = this.grid[0][0]; // initially the starting cell
         int visitedCells = 1;
 
@@ -64,12 +66,12 @@ public class Maze {
         // The goal is not to visit all nodes, but rather to reach the finishing Cell
         while(!currCell.equals(finish)) {
             // Finding all neighbors of currCell that have edges between them and haven't been visited yet
-            List<Cell> neighbors = currCell.getNeighbors();
+            List<Cell> edges = currCell.getConnections();
             // If 1 or more are found, choose a Cell at random, add it to visitOrder, and make it the new currCell
-            if(!neighbors.isEmpty()) {
-                Cell neighbor = neighbors.get(r.nextInt(neighbors.size()));
+            if(!edges.isEmpty()) {
+                Cell edge = edges.get(r.nextInt(edges.size()));
                 cellStack.push(currCell);
-                currCell = neighbor;
+                currCell = edge;
                 if(!visitOrder.contains(currCell)) { visitOrder.add(currCell); }
             }
             else {
@@ -94,14 +96,15 @@ public class Maze {
         visitOrder.add(currCell);
 
         Random r = new Random();
+        assert currCell != null;
         while(!currCell.equals(finish)) {
             // Finding all neighbors of currCell that have edges between them and haven't been visited yet
-            List<Cell> neighbors = currCell.getNeighbors();
+            List<Cell> edges = currCell.getConnections();
             // If 1 or more are found, choose a Cell at random, add it to visitOrder, and make it the new currCell
-            if(!neighbors.isEmpty()) {
-                Cell neighbor = neighbors.get(r.nextInt(neighbors.size()));
-                cellQueue.add(neighbor);
-                currCell = neighbor;
+            if(!edges.isEmpty()) {
+                Cell edge = edges.get(r.nextInt(edges.size()));
+                cellQueue.add(currCell);
+                currCell = edge;
                 if(!visitOrder.contains(currCell)) { visitOrder.add(currCell); }
             }
             else {
