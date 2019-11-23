@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -6,39 +5,37 @@ import java.util.*;
  * Written By: William Nguyen
  */
 public class Maze {
-    // 2D Array of Cells starts off as a Grid
+    // 2D Array of Cells starts off as a grid
     private final int numVertices;
     private Cell[][] grid;
 
 
     public Maze(int numVertices) {
         this.numVertices = numVertices;
-
-        // Initializing & filling the grid with Cells with all walls up
+        // Initializing & filling the grid with Cells with proper coordinates
         grid = new Cell[this.numVertices][this.numVertices];
         fillGrid(this.grid);
     }
 
     /**
-     * Maze Generation Algorithm using DFS
+     * Simple Maze Generation Algorithm using DFS
      */
     public void generateMaze() {
         // Stack eliminates recursion: holds cell locations
         Stack<Cell> cellStack = new Stack<>();
         int totalCells = (this.numVertices * this.numVertices);
         Cell currCell = this.grid[0][0]; // initially the starting cell
-        cellStack.push(currCell);
         int visitedCells = 1;
 
         Random r = new Random(); // set seed here for testing
         while(visitedCells < totalCells) {
             // Finding all neighbors of currCell with ALL WALLS INTACT
-            ArrayList<Cell> neighbors = findAdjacentNeighbors(currCell);
-
+            findNewNeighbors(currCell);
+            List<Cell> neighbors = currCell.getNeighbors();
             // If 1 or more are found, choose a Cell at random and knock down wall between it and currCell
             if(!neighbors.isEmpty()) {
                 Cell neighbor = neighbors.get(r.nextInt(neighbors.size()));
-                addEdge(currCell, neighbor);
+                currCell.addEdge(neighbor); // adds to connections and removes from neighbors
                 cellStack.push(currCell);
                 currCell = neighbor;
                 visitedCells++;
@@ -67,21 +64,16 @@ public class Maze {
         // The goal is not to visit all nodes, but rather to reach the finishing Cell
         while(!currCell.equals(finish)) {
             // Finding all neighbors of currCell that have edges between them and haven't been visited yet
-            ArrayList<Cell> neighbors = findAdjacentNeighbors(currCell);
-            for(Cell neighbor : neighbors) {
-                if((!currCell.hasEdge(neighbor)) || visitOrder.contains(neighbor)) {
-                    neighbors.remove(neighbor);
-                }
-            }
+            List<Cell> neighbors = currCell.getNeighbors();
             // If 1 or more are found, choose a Cell at random, add it to visitOrder, and make it the new currCell
             if(!neighbors.isEmpty()) {
                 Cell neighbor = neighbors.get(r.nextInt(neighbors.size()));
                 cellStack.push(currCell);
                 currCell = neighbor;
-                visitOrder.add(currCell);
+                if(!visitOrder.contains(currCell)) { visitOrder.add(currCell); }
             }
             else {
-                // pop the stack and backtrack
+                // Pop the Stack and backtrack
                 currCell = cellStack.pop();
             }
         }
@@ -103,22 +95,17 @@ public class Maze {
 
         Random r = new Random();
         while(!currCell.equals(finish)) {
-            ArrayList<Cell> neighbors = findAdjacentNeighbors(currCell);
             // Finding all neighbors of currCell that have edges between them and haven't been visited yet
-            for(Cell neighbor : neighbors) {
-                if((!currCell.hasEdge(neighbor)) || visitOrder.contains(neighbor)) {
-                    neighbors.remove(neighbor);
-                }
-            }
+            List<Cell> neighbors = currCell.getNeighbors();
             // If 1 or more are found, choose a Cell at random, add it to visitOrder, and make it the new currCell
             if(!neighbors.isEmpty()) {
-                Cell neighbor = neighbors.get(r.nextInt(neighbors.size() - 1));
+                Cell neighbor = neighbors.get(r.nextInt(neighbors.size()));
                 cellQueue.add(neighbor);
                 currCell = neighbor;
-                visitOrder.add(currCell);
+                if(!visitOrder.contains(currCell)) { visitOrder.add(currCell); }
             }
             else {
-                // "dequeue" the queue and backtrack
+                // "Dequeue" the Queue and backtrack
                 currCell = cellQueue.poll();
             }
         }
@@ -130,7 +117,7 @@ public class Maze {
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
     /**
-     * Fills the 2D Array representing the Grid with Cells containing initial information
+     * Fills the 2D Array representing the Grid with Cells with proper coordinate info
      */
     private void fillGrid(Cell[][] grid) {
         for(int i = 0; i < grid.length; i++) {
@@ -143,59 +130,46 @@ public class Maze {
 
     /**
      * Finds valid neighbors in the north, east, south, and west directions—
-     * — that of which have all walls intact
+     * — that of which have ALL WALLS INTACT
      * @return a list of coordinate pairs in the adj-matrix
      */
-    public ArrayList<Cell> findAdjacentNeighbors(Cell cell) {
-        // list of adjacent neighbors
-        ArrayList<Cell> neighbors = new ArrayList<>();
+    public void findNewNeighbors(Cell cell) {
+        int xCoord = cell.getX(), yCoord = cell.getY();
 
-        // Conditionals to set valid values of starting and ending values for i and j of the loop
-        int startPosX = ((cell.getX() - 1) < 0) ? cell.getX() : cell.getX() - 1;
-        int endPosX = ((cell.getX() +  1) > (this.numVertices - 1)) ? cell.getX() : cell.getX() + 1;
-        int startPosY = ((cell.getY() - 1) < 0) ? cell.getY() : cell.getY() - 1;
-        int endPosY = ((cell.getY() + 1 > (this.numVertices - 1))) ? cell.getY() : cell.getY() + 1;
-
-        // grid[i][j] are the neighbors of the current cell
-        for(int i  = startPosX; i <= endPosX; i++) {
-            for(int j = startPosY; j <= endPosY; j++) {
-                // adding to a list of cells so that we can keep track of neighbor coordinates
-                if(i != cell.getX() && j != cell.getY() && this.grid[i][j].allWallsIntact()) {
-                    neighbors.add(this.grid[i][j]);
-                }
-            }
+        // Only adding neighbors to the list that are within bounds & have ALL WALLS INTACT
+        if(xCoord  > 0 && this.grid[xCoord - 1][yCoord].allWallsIntact()) {
+            cell.addNeighbor(this.grid[xCoord - 1][yCoord]);
         }
-        return neighbors;
-    }
-
-    // Emulates knocking down a wall between 2 cells
-    public void addEdge(Cell cell1, Cell cell2) {
-
-        /* Although we call it "X", we determine "X" as "i" in the loop, which dictates rows (y-index) */
-
-        // North/South Edge: Cell2 is above Cell1
-        if((cell1.getX() - 1) == cell2.getX()) {
-            cell1.northPath();
-            cell2.southPath();
+        if(yCoord  > 0 && this.grid[xCoord][yCoord - 1].allWallsIntact()) {
+            cell.addNeighbor(this.grid[xCoord][yCoord - 1]);
         }
-        // North/South Edge: Cell1 is above Cell2
-        else if((cell1.getX() + 1) == cell2.getX()) {
-            cell1.southPath();
-            cell2.northPath();
+        if(xCoord + 1 < this.numVertices && this.grid[xCoord + 1][yCoord].allWallsIntact()) {
+            cell.addNeighbor(this.grid[xCoord + 1][yCoord]);
         }
-        // East/West Edge: Cell2 precedes Cell1
-        else if((cell1.getY() - 1) == cell2.getY()) {
-            cell1.westPath();
-            cell2.eastPath();
-        }
-        // East/West Edge: Cell1 precedes Cell2
-        else if((cell1.getY() + 1) == cell2.getY()) {
-            cell1.eastPath();
-            cell2.westPath();
+        if(yCoord + 1 < this.numVertices && this.grid[xCoord][yCoord + 1].allWallsIntact()) {
+            cell.addNeighbor(this.grid[xCoord][yCoord + 1]);
         }
     }
 
     // Standard Accessor methods for encapsulation
     public int getNumVertices() { return this.numVertices; }
     public Cell[][] getGrid() { return this.grid; }
+
+
+
+    // ok this works fuckin finally
+    public static void main(String[] args) {
+        Maze maze = new Maze(3);
+        Cell[][] grid = maze.getGrid();
+        Cell start = grid[1][1];
+        maze.findNewNeighbors(start);
+
+        List<Cell> neighbors = start.getNeighbors();
+        for(Cell c : neighbors) {
+            System.out.println("X coord: " + c.getX() + " Y coord: "  + c.getY());
+            for(Cell c1 : c.getNeighbors()) {
+                System.out.println("X coord: " + c1.getX() + " Y coord: "  + c1.getY());
+            }
+        }
+    }
 }

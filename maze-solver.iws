@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8552b342-0b2e-4e51-93ba-b451b4025227" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/CellTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maze-solver.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/maze-solver.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maze-solver.iws" beforeDir="false" afterPath="$PROJECT_DIR$/maze-solver.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/ASCIIGrid.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/ASCIIGridTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/ASCIIGridTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/Maze.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/Maze.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/MazeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/MazeTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ASCIIGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ASCIIGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ASCIIGridTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ASCIIGridTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Maze.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MazeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MazeTest.java" afterDir="false" />
     </list>
@@ -16,6 +26,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit4 Test Class" />
       </list>
     </option>
   </component>
@@ -24,6 +35,11 @@
   </component>
   <component name="ProjectId" id="1TN6UT08rhOXeO4kRAba4cU5NSl" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
       <recent name="" />
@@ -44,32 +60,49 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.MazeTest.generateMaze">
-    <configuration name="MazeTest.addEdge" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.CellTest.hasEdge">
+    <configuration name="Maze" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Maze" />
+      <module name="maze-solver" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CellTest.allWallsIntact" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="maze-solver" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MazeTest" />
-      <option name="METHOD_NAME" value="addEdge" />
+      <option name="MAIN_CLASS_NAME" value="CellTest" />
+      <option name="METHOD_NAME" value="allWallsIntact" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MazeTest.findAdjacentNeighbors" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CellTest.hasEdge" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="maze-solver" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MazeTest" />
-      <option name="METHOD_NAME" value="findAdjacentNeighbors" />
+      <option name="MAIN_CLASS_NAME" value="CellTest" />
+      <option name="METHOD_NAME" value="hasEdge" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MazeTest.generateMaze" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MazeTest.solveBFS" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="maze-solver" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="MazeTest" />
-      <option name="METHOD_NAME" value="generateMaze" />
+      <option name="METHOD_NAME" value="solveBFS" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MazeTest.solveDFS" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="maze-solver" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="MazeTest" />
+      <option name="METHOD_NAME" value="solveDFS" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -77,9 +110,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.MazeTest.generateMaze" />
-        <item itemvalue="JUnit.MazeTest.addEdge" />
-        <item itemvalue="JUnit.MazeTest.findAdjacentNeighbors" />
+        <item itemvalue="JUnit.CellTest.hasEdge" />
+        <item itemvalue="JUnit.CellTest.allWallsIntact" />
+        <item itemvalue="JUnit.MazeTest.solveBFS" />
+        <item itemvalue="JUnit.MazeTest.solveDFS" />
+        <item itemvalue="Application.Maze" />
       </list>
     </recent_temporary>
   </component>
