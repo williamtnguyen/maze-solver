@@ -76,7 +76,7 @@ public class Cell {
 
         // North/South Edge: Neighbor is above "this" Cell
         if((this.getX() - 1) == neighbor.getX()) {
-            this.connections.add( neighbor);
+            this.connections.add(neighbor);
             neighbor.connections.add(this);
         }
         // North/South Edge: "this" Cell is above Neighbor

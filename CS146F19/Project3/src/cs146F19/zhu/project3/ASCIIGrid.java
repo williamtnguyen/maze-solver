@@ -68,7 +68,7 @@ public class ASCIIGrid {
 					if (y % 2 == 0) {// Even Columns
 						gridASCII[x][y] = "|";
 					} else if (y % 2 == 1) {// Odd Columns
-						gridASCII[x][y] = ".";
+						gridASCII[x][y] = " ";
 					}
 				}
 			}
@@ -97,10 +97,9 @@ public class ASCIIGrid {
 				int i = 0;
 				int xDiff=0;
 				int yDiff=0;
-				while (a.get(i) != null) {
 					// Only the left furthest north perimeter wall can be broken
 					// down, "x" if not.
-					Cell connection = a.get(i);
+				for(int g = 0; g<grid[x][y].getConnections().size(); g++){
 					//North wall: cell x - cell connection x = 1
 					xDiff = grid[x][y].getX()-a.get(i).getX();
 					yDiff = grid[x][y].getY()-a.get(i).getY();
@@ -142,9 +141,11 @@ public class ASCIIGrid {
 							gridASCII[xASCII][yASCII - 1] = " ";
 						}
 					}
-					i++;
+//					i++;
 				}
 			}
+//			}
+//			}
 		}
 		return gridASCII;
 	}

@@ -2,44 +2,48 @@ package cs146F19.zhu.project3;
 
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class MazeTest {
 
-    // 4 x 4 maze
-    private Maze maze = new Maze(4);
-    private Cell[][] grid = maze.getGrid();
+    Maze maze = new Maze(4);
+    Cell[][] grid = maze.getGrid();
 
+    /* Testing if the method compiles properly */
     @Test
     public void generateMaze() {
+        maze.generateMaze();
     }
+
 
     @Test
     public void solveDFS() {
+        maze.generateMaze();
+        List<Cell> visitOrder = maze.solveDFS();
+        // Asserting DFS reached the finish point
+        assertEquals(3, visitOrder.get(visitOrder.size() - 1).getX());
+        assertEquals(3, visitOrder.get(visitOrder.size() - 1).getY());
+        // Printing visit order
+        for(Cell c : visitOrder) {
+            System.out.println("X Coord: " + c.getX() + " Y Coord: " + c.getY());
+        }
     }
 
     @Test
     public void solveBFS() {
+        maze.generateMaze();
+        List<Cell> visitOrder = maze.solveBFS();
+        // Asserting BFS reached the finish point
+        assertEquals(3, visitOrder.get(visitOrder.size() - 1).getX());
+        assertEquals(3, visitOrder.get(visitOrder.size() - 1).getY());
+        for(Cell c : visitOrder) {
+            System.out.println("X Coord: " + c.getX() + " Y Coord: " + c.getY());
+        }
     }
 
     @Test
-    public void findAdjacentNeighbors() {
+    public void findNewNeighbors() {
     }
-
-//    /* Works as expected */
-//    @Test
-//    public void addEdge() {
-//        Cell test1 = grid[0][0];
-//        Cell test2 = grid[0][1];
-//        Cell test3 = grid[0][2];
-//
-//        maze.addEdge(test1, test2);
-//        maze.addEdge(test2, test3);
-//
-//        assertTrue(test1.getWestWall());
-//        assertFalse(test1.getEastWall());
-//        assertFalse(test2.getWestWall()); // test2 Cell has an edge with test1 Cell in West direction
-//        assertFalse(test2.getEastWall()); // test2 Cell has an edge with test3 Cell in East direction
-//        assertTrue(test3.getEastWall());
-//    }
 }

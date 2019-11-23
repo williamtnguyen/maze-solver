@@ -17,6 +17,12 @@ public class Maze {
         grid = new Cell[this.numVertices][this.numVertices];
         fillGrid(this.grid);
     }
+    
+    //Constructor for testing sample cell[][] grids only
+    public Maze(int numVertices, Cell[][] grid) {
+        this.numVertices = numVertices;
+        this.grid=grid;
+    }
 
     /**
      * Simple Maze Generation Algorithm using DFS

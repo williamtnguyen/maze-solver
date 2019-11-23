@@ -31,9 +31,15 @@ public class MazeTester {
 		Cell t = new Cell(2,2);
 		Cell y = new Cell(3,2);
 		Cell u = new Cell(3,3);
-		Cell x = new Cell(0,3);
-		Cell z = new Cell(3,0);
+//		Cell x = new Cell(0,3);
+//		Cell z = new Cell(3,0);
 
+		q.addEdge(w);
+		w.addEdge(e);
+		e.addEdge(r);
+		r.addEdge(t);
+		t.addEdge(y);
+		y.addEdge(u);
 //		q.northPath();
 //		q.eastPath();
 //		w.southPath();
@@ -44,24 +50,25 @@ public class MazeTester {
 //		u.southPath();
 		
 
-	
-		arr.add(q);
-		arr.add(w);
-		arr.add(e);
-		arr.add(r);
-		arr.add(t);
-		arr.add(y);
-		arr.add(u);
-		arr.add(x);
-		arr.add(z);
+
 		
 		Cell[][] c= new Cell[4][4];
-		
-		for(int row=0; row<c.length; row++){
-			for(int col=0; col<c[0].length; col++){
-				c[row][col] = new Cell(row,col);
-			}
-		}
+		c[0][0] = q;
+		c[0][1] = w;
+		c[0][2] = new Cell(0,2);
+		c[0][3] = new Cell(0,3);
+		c[1][0] = new Cell(1,0);
+		c[1][1] = e;
+		c[1][2] = r;
+		c[1][3] = new Cell(1,3);
+		c[2][0] = new Cell(2,0);
+		c[2][1] = new Cell(2,1);
+		c[2][2] = t;
+		c[2][3] = new Cell(2,3);
+		c[3][0] = new Cell(3,0);
+		c[3][1] = new Cell(3,1);
+		c[3][2] = y;
+		c[3][3] = u;
 		
 //		c[0][0].northPath();
 //		c[0][0].southPath();
@@ -70,22 +77,22 @@ public class MazeTester {
 //		c[2][1].westPath();
 //		c[2][0].westPath();		
 //		
-//		Maze m = new Maze(4, c);
+		Maze m = new Maze(4, c);
 //		System.out.println(m.getNumVertices());
-//		ASCIIGrid grid = new ASCIIGrid(m);
+		ASCIIGrid grid = new ASCIIGrid(m);
 		
-//		System.out.println("Grid with broken walls");
-//		String[][] test = grid.updateASCIIGridWalls();
-//		p.printMaze(test);
-//
-//		System.out.println("Traversal Path");
-//		String[][] test1 = grid.updateASCIIGridWithTraversalPath(arr);
-//		p.printMaze(test1);
-//		
-//		System.out.println("Traversal Path");
-//		String[][] test2 = grid.updateASCIIGridWithShortestPath(arr);
-//		p.printMaze(test2);
-//
+		System.out.println("Grid with broken walls");
+		String[][] test = grid.updateASCIIGridWalls();
+		p.printMaze(test);
+
+		System.out.println("Traversal Path");
+		String[][] test1 = grid.updateASCIIGridWithTraversalPath(arr);
+		p.printMaze(test1);
+		
+		System.out.println("Traversal Path");
+		String[][] test2 = grid.updateASCIIGridWithShortestPath(arr);
+		p.printMaze(test2);
+
 //		grid.printPath(arr);
 //		grid.printLength(arr); //Total length
 //		grid.printVisited(arr); //Total visited, should be different arrays

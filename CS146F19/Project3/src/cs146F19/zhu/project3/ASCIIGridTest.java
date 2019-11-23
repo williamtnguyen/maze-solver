@@ -13,13 +13,13 @@ public class ASCIIGridTest {
     private MazePrinter p = new MazePrinter(maze);
 
 
-    @Test
-    public void generateASCIIGrid() {
-    }
-
-    @Test
-    public void updateASCIIGridWalls() {
-    }
+//    @Test
+//    public void generateASCIIGrid() {
+//    }
+//
+//    @Test
+//    public void updateASCIIGridWalls() {
+//    }
 
     @Test
     public void updateASCIIGridWithTraversalPath() {
@@ -32,38 +32,38 @@ public class ASCIIGridTest {
         maze.generateMaze();
 
         // Call this after "maze.generateMaze()" because that updates the ASCII grid with knocked down walls
-//        asciiGrid.updateASCIIGridWalls();
+        asciiGrid.updateASCIIGridWalls();
 
         // ArrayLists containing the visit order of the traversal. Only test one at a time, this is just for example
-        ArrayList<Cell> dfsVisitOrder = maze.solveDFS();
+//        ArrayList<Cell> dfsVisitOrder = maze.solveDFS();
 //        ArrayList<Cell> bfsVisitOrder = maze.solveBFS();
 
-        asciiGrid.updateASCIIGridWithTraversalPath(dfsVisitOrder);
+//        asciiGrid.updateASCIIGridWithTraversalPath(dfsVisitOrder);
 
-        // Todo: print accordingly
-        System.out.println("Grid with broken walls");
-        p.printMaze(asciiGrid.getGridASCII());
-
-        System.out.println("Grid with broken walls");
-        p.printMaze(asciiGrid.getShortestPathASCII());
-
-        System.out.println("Traversal Path");
-        p.printMaze(asciiGrid.getTraversalPathASCII());
+//        // Todo: print accordingly
+//        System.out.println("Grid with broken walls");
+//        p.printMaze(asciiGrid.getGridASCII());
+//
+//        System.out.println("Grid with broken walls");
+//        p.printMaze(asciiGrid.getShortestPathASCII());
+//
+//        System.out.println("Traversal Path");
+//        p.printMaze(asciiGrid.getTraversalPathASCII());
     }
 
-    @Test
-    public void updateASCIIGridWithShortestPath() {
-    }
-
-    @Test
-    public void printPath() {
-    }
-
-    @Test
-    public void printLength() {
-    }
-
-    @Test
-    public void printVisited() {
-    }
+//    @Test
+//    public void updateASCIIGridWithShortestPath() {
+//    }
+//
+//    @Test
+//    public void printPath() {
+//    }
+//
+//    @Test
+//    public void printLength() {
+//    }
+//
+//    @Test
+//    public void printVisited() {
+//    }
 }
