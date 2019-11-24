@@ -237,21 +237,20 @@ public class ASCIIGrid {
     /**
      * Get Path Coordinates, total length of path, total visited cells
      */
-    public void printPath(ArrayList<Cell> shortestPath) {
-        System.out.print("Path: ");
+    public String getPath(ArrayList<Cell> shortestPath) {
+        String path = "Path: ";
         for (int i = 0; i < shortestPath.size(); i++) {
-            System.out.print("(" + shortestPath.get(i).getX() + "," + shortestPath.get(i).getY() + ") ");
+            path = path + "(" + shortestPath.get(i).getX() + "," + shortestPath.get(i).getY() + ") ";
         }
-        System.out.println("");
+        return path;
     }
 
-    public void printLength(ArrayList<Cell> shortestPath) {
-        System.out.println("Length of Shortest Path: " + shortestPath.size());
+    public String getLength(ArrayList<Cell> shortestPath) {
+        return ("Length of Shortest Path: " + shortestPath.size());
     }
 
-    public void printVisited(ArrayList<Cell> visitOrder) {
-        System.out.println("Visited Cells: " + visitOrder.size());
-
+    public String getVisited(ArrayList<Cell> visitOrder) {
+        return ("Visited Cells: " + visitOrder.size());
     }
 
     /**

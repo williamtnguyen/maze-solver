@@ -54,7 +54,7 @@ public class FileTester {
 		m.printMaze(gridSolvedShortest);
 		
 		//Professor Potika's Sample Output in guidelines:
-		t.arrayToTxt(dfsTestASCII, bfsTestASCII);
+		t.arrayToTxt(dfsTestASCII, bfsTestASCII, dfs, bfs, bfsShortestPath);
 		
 	}
 }

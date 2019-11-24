@@ -48,6 +48,7 @@ public class Maze {
                 currCell.addEdge(neighbor);
                 // Removing this neighbor from "neighbors" of all cells
                 removeFromNeighbors(neighbor);
+                neighbor.removeNeighbor(currCell);
                 // Push to stack and update to next cell in traversal
                 cellStack.push(currCell);
                 currCell = neighbor;

@@ -8,8 +8,8 @@ import static org.junit.Assert.*;
 
 public class ASCIIGridTest {
 
-    private Maze maze = new Maze(4);
-    private Maze maze2 = new Maze(4);
+    private Maze maze = new Maze(6);
+    private Maze maze2 = new Maze(6);
     private Cell[][] grid = maze.getGrid();
     private Cell[][] grid2 = maze2.getGrid();
 
@@ -80,7 +80,7 @@ public class ASCIIGridTest {
 
         ArrayList<Cell> shortestPath = maze.solveBFS().get(1);
         printer.printMaze(asciiGrid.updateASCIIGridWithShortestPath(shortestPath));
-        asciiGrid.printPath(shortestPath);
+        System.out.println(asciiGrid.getPath(shortestPath));
     }
 
     @Test

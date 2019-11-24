@@ -62,18 +62,18 @@ public class TextFileReader {
 	public String[][] listToASCIIGrid() {
 		// initialize
 		ASCIIGrid = new String[(xSize * 2) + 1][(ySize * 2) + 1];
-		System.out.println("x: "+ ((xSize * 2) + 1) + ", y: "+ ((ySize *2)+1));
+		System.out.println("x: " + ((xSize * 2) + 1) + ", y: " + ((ySize * 2) + 1));
 
 		// Double for loop to traverse ArrayList then every character in each
 		// string
-		for (int row = 0; row < (xSize*2)+1; row++) {
+		for (int row = 0; row < (xSize * 2) + 1; row++) {
 			String arrayElement = dataArray.get(row);
 			String[] splitToSingleCharacters = arrayElement.split("");
 			for (int col = 0; col < splitToSingleCharacters.length; col++) {
 				ASCIIGrid[row][col] = splitToSingleCharacters[col];
 			}
 		}
-		
+
 		return ASCIIGrid;
 	}
 
@@ -91,47 +91,47 @@ public class TextFileReader {
 			for (int y = 0; y < ySize; y++) {
 				int xASCII = (x * 2) + 1;
 				int yASCII = (y * 2) + 1;
-				//Special case: first cell
-				if (cellGrid[x][y] == cellGrid[0][0]) { 
-					//If no wall to the right, then add connection
-					if (!ASCIIGrid[xASCII][yASCII + 1].equals("|")) { 
+				// Special case: first cell
+				if (cellGrid[x][y] == cellGrid[0][0]) {
+					// If no wall to the right, then add connection
+					if (!ASCIIGrid[xASCII][yASCII + 1].equals("|")) {
 						cellGrid[x][y].addEdge(cellGrid[x][y + 1]);
 					}
-					//If no wall below
-					if (!ASCIIGrid[xASCII + 1][yASCII].equals("-")) { 
+					// If no wall below
+					if (!ASCIIGrid[xASCII + 1][yASCII].equals("-")) {
 						cellGrid[x][y].addEdge(cellGrid[x + 1][y]);
 					}
-					//Special case: last cell
+					// Special case: last cell
 				} else if (cellGrid[x][y] == cellGrid[xSize - 1][ySize - 1]) {
-					//If no wall to left
+					// If no wall to left
 					if (!ASCIIGrid[xASCII][yASCII - 1].equals("|")) {
 						cellGrid[x][y].addEdge(cellGrid[x][y - 1]);
 					}
-					//If no wall above
+					// If no wall above
 					if (!ASCIIGrid[xASCII - 1][yASCII].equals("-")) {
 						cellGrid[x][y].addEdge(cellGrid[x - 1][y]);
 					}
 				} else { // Base case
 					if ((x + 1) < xSize) { // Within upper row dimension bounds
-						//If no wall below
-						if (!ASCIIGrid[xASCII + 1][yASCII].equals("-")) { 
+						// If no wall below
+						if (!ASCIIGrid[xASCII + 1][yASCII].equals("-")) {
 							cellGrid[x][y].addEdge(cellGrid[x + 1][y]);
 						}
 					}
 					if ((x - 1) > 0) { // Within lower row dimension bounds
-						//If no wall above
+						// If no wall above
 						if (!ASCIIGrid[xASCII - 1][yASCII].equals("-")) {
 							cellGrid[x][y].addEdge(cellGrid[x - 1][y]);
 						}
 					}
 					if ((y - 1) > 0) { // Within lower col dimension bounds
-						//If no wall to left
+						// If no wall to left
 						if (!ASCIIGrid[xASCII][yASCII - 1].equals("|")) {
 							cellGrid[x][y].addEdge(cellGrid[x][y - 1]);
 						}
 					}
 					if ((y + 1) < ySize) { // Within upper col dimension bounds
-						//If no wall to right
+						// If no wall to right
 						if (!ASCIIGrid[xASCII][yASCII + 1].equals("|")) {
 							cellGrid[x][y].addEdge(cellGrid[x][y + 1]);
 						}
@@ -144,7 +144,8 @@ public class TextFileReader {
 	}
 
 	// Copy each line of the String[][] to a txt file
-	public void arrayToTxt(ASCIIGrid dfs, ASCIIGrid bfs) { 
+	public void arrayToTxt(ASCIIGrid dfs, ASCIIGrid bfs, ArrayList<Cell> dfsPath, ArrayList<Cell> bfsPath,
+			ArrayList<Cell> shortestPath) {
 		try {
 			FileWriter fw = new FileWriter("text-file-output/output.txt");
 			BufferedWriter bw = new BufferedWriter(fw);
@@ -166,14 +167,14 @@ public class TextFileReader {
 				}
 				bw.newLine();
 			}
-			bw.write("Path: "  );
+			bw.write(dfs.getPath(shortestPath));
 			bw.newLine();
-			bw.write("Length of Path: "  );
+			bw.write(dfs.getLength(shortestPath));
 			bw.newLine();
-			bw.write("VisitedCells: "  );
+			bw.write(dfs.getVisited(dfsPath));
 			bw.newLine();
 			bw.newLine();
-			
+
 			bw.write("BFS:");
 			bw.newLine();
 			for (int i = 0; i < bfsGrid.length; i++) {
@@ -189,13 +190,13 @@ public class TextFileReader {
 				}
 				bw.newLine();
 			}
-			bw.write("Path: "  );
+			bw.write(bfs.getPath(shortestPath));
 			bw.newLine();
-			bw.write("Length of Path: "  );
+			bw.write(bfs.getLength(shortestPath));
 			bw.newLine();
-			bw.write("VisitedCells: "  );
+			bw.write(bfs.getVisited(bfsPath));
 			bw.newLine();
-			
+
 			bw.close();
 			fw.close();
 		} catch (Exception e) {
