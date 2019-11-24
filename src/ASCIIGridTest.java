@@ -53,7 +53,7 @@ public class ASCIIGridTest {
         printer.printMaze(asciiGrid2.updateASCIIGridWithTraversalPath(visitOrder2));
     }
 
-    /* Works as expected */
+    /* Works as expected, prints shortest path traversal */
     @Test
     public void updateASCIIGridWithShortestPath() {
         maze.generateMaze();
@@ -69,7 +69,7 @@ public class ASCIIGridTest {
         printer.printMaze(asciiGrid.updateASCIIGridWithShortestPath(shortestOrder));
     }
 
-    /* Works as expected */
+    /* Works as expected, prints shortest path coordinates */
     @Test
     public void printPath() {
         maze.generateMaze();
@@ -79,13 +79,5 @@ public class ASCIIGridTest {
         ArrayList<Cell> shortestPath = maze.solveBFS().get(1);
         printer.printMaze(asciiGrid.updateASCIIGridWithShortestPath(shortestPath));
         asciiGrid.printPath(shortestPath);
-    }
-
-    @Test
-    public void printLength() {
-    }
-
-    @Test
-    public void printVisited() {
     }
 }

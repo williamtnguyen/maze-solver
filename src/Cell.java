@@ -105,7 +105,7 @@ public class Cell {
         neighbor.connections.remove(this);
     }
 
-    // Removes neighbor bi-directionally
+    // Removes neighbor uni-directionally
     public void removeNeighbor(Cell neighbor) {
         this.neighbors.remove(neighbor);
         neighbor.neighbors.remove(this);

@@ -24,15 +24,5 @@ public class CellTest {
         assertTrue(grid[0][0].hasEdge(grid[0][1]));
     }
 
-    @Test
-    public void addNeighbor() {
-    }
 
-    @Test
-    public void addEdge() {
-    }
-
-    @Test
-    public void testEquals() {
-    }
 }

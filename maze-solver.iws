@@ -3,11 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="8552b342-0b2e-4e51-93ba-b451b4025227" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/maze-solver.iws" beforeDir="false" afterPath="$PROJECT_DIR$/maze-solver.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/ASCIIGrid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/ASCIIGrid.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/maze-solver/ASCIIGridTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/ASCIIGridTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/CellTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/CellTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/maze-solver/Maze.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/Maze.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/MazeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/MazeTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ASCIIGridTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ASCIIGridTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CellTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CellTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Maze.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -111,9 +113,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ASCIIGridTest.updateASCIIGridWithTraversalPath" />
+        <item itemvalue="JUnit.ASCIIGridTest.updateASCIIGridWithShortestPath" />
         <item itemvalue="JUnit.ASCIIGridTest.updateASCIIGridWalls" />
         <item itemvalue="JUnit.ASCIIGridTest.printPath" />
-        <item itemvalue="JUnit.ASCIIGridTest.updateASCIIGridWithShortestPath" />
         <item itemvalue="JUnit.MazeTest.solveBFS" />
       </list>
     </recent_temporary>
