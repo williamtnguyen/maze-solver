@@ -12,7 +12,7 @@ public class Maze {
     private final int totalCells;
     private Cell start, finish;
 
-    // Standard Ctor
+    // Standard Constructor to initialize instance fields
     public Maze(int numVertices) {
         this.numVertices = numVertices;
         // Initializing & filling the grid with Cells with proper coordinates
@@ -47,7 +47,6 @@ public class Maze {
                 currCell.addEdge(neighbor);
                 // Removing this neighbor from "neighbors" of all cells
                 removeFromNeighbors(neighbor);
-
                 // Push to stack and update to next cell in traversal
                 cellStack.push(currCell);
                 currCell = neighbor;
@@ -73,7 +72,6 @@ public class Maze {
         Cell currCell = start;
         cellStack.push(currCell);
 
-//        Random r = new Random(); // set seed here for testing
         // The goal is not to visit all nodes, but rather to reach the finishing Cell
         while(!currCell.equals(finish)) {
             currCell = cellStack.pop();
@@ -93,7 +91,7 @@ public class Maze {
 
     /**
      * BFS Iterative Solution
-     * @return List Index 0 - BFS Visit Order; List Index 1 - Dijkstra's Shortest Path Visit Order
+     * @return List-Index 0: BFS Visit Order; List-Index 1: Dijkstra's Shortest Path Visit Order
      */
     public ArrayList<ArrayList<Cell>> solveBFS() {
         // BFS nature calls for FIFO order
@@ -110,20 +108,21 @@ public class Maze {
         while(!cellQueue.isEmpty()) {
             currCell = cellQueue.poll();
             visitOrder.add(currCell);
+            // The goal is not to visit all nodes, but rather to reach the finishing Cell
             if(currCell.equals(finish)) { break; }
+
             for(Cell edge : currCell.getConnections()) {
                 // If the edge is undiscovered, i.e., WHITE
                 if(edge.getColor() == 0) {
-                    edge.setColor(1); // not fully discovered, i.e., GRAY
-                    edge.setDistance(edge.getDistace() + 1);
+                    edge.setColor(1); // Set to "not fully discovered", i.e., GRAY
+                    edge.setDistance(edge.getDistance() + 1);
                     edge.setParent(currCell);
                     cellQueue.add(edge);
                 }
             }
-            // Fully discovered, i.e., BLACK
+            // Set to "fully discovered", i.e., BLACK
             currCell.setColor(2);
         }
-
         // Get the shortest path order and return it with the visit order
         ArrayList<Cell> shortestOrder = bfsShortestPath(finish);
         ArrayList<ArrayList<Cell>> traversals = new ArrayList<>();
@@ -195,7 +194,7 @@ public class Maze {
         }
         start.setColor(1); // GREY because it is first to be visited
         start.setDistance(0);
-        start.setParent(null); // repeating steps in case
+        start.setParent(null); // repeating this step in case
     }
 
     // Reverse iteration from target to source to find the shortest path
@@ -206,7 +205,7 @@ public class Maze {
             cellStack.push(currCell);
             currCell = currCell.getParent();
         }
-        // Putting it into a List to make our lives easier
+        // Putting it into a List to make our lives easier (ascending iteration)
         ArrayList<Cell> shortestOrder = new ArrayList<>();
         while(!cellStack.isEmpty()) { shortestOrder.add(cellStack.pop()); }
         return shortestOrder;

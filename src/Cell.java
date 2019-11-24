@@ -9,14 +9,13 @@ public class Cell {
     private final int x, y;
     // neighbors is all valid neighbors, connections is edge relationships
     public ArrayList<Cell> neighbors, connections; // public to allow modification by value, not reference
-
     // Fields to be utilized in BFS traversal and Dijkstra's shortest Path
     private Cell parent;
     private int distance;
-    // 0 = WHITE; 1 = GREY; 2 = BLACK
-    private int color;
+    private int color;  // 0 = WHITE; 1 = GREY; 2 = BLACK
 
 
+    // Standard Constructor to initialize instance fields
     public Cell(int x, int y) {
         // Theoretically, once x and y is set, it does not change
         this.x = x;
@@ -75,6 +74,7 @@ public class Cell {
 
     // Emulates knocking down a wall between 2 cells
     public void addEdge(Cell neighbor) {
+
         /* Although we call it "X", we determine "X" as "i" in the loop, which dictates rows (y-index) */
 
         // North/South Edge: Neighbor is above "this" Cell
@@ -118,7 +118,7 @@ public class Cell {
 
     /* Accessor methods for BFS() */
     public int getColor() { return this.color; }
-    public int getDistace() { return this.distance; }
+    public int getDistance() { return this.distance; }
     public Cell getParent() { return this.parent; }
 
 

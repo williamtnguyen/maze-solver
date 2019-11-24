@@ -9,13 +9,13 @@ public class MazeTest {
     Maze maze = new Maze(3);
     Cell[][] grid = maze.getGrid();
 
-    /* Testing if the method compiles properly */
+    /* Testing if the method compiles properly before applying DFS/BFS */
     @Test
     public void generateMaze() {
         maze.generateMaze();
     }
 
-
+    /* Works as expected, testing for traversal coordinates */
     @Test
     public void solveDFS() {
         maze.generateMaze();
@@ -29,6 +29,7 @@ public class MazeTest {
         }
     }
 
+    /* Works as expected, testing for traversal coordinates */
     @Test
     public void solveBFS() {
         maze.generateMaze();
@@ -41,6 +42,7 @@ public class MazeTest {
         }
     }
 
+    /* Works as expected, testing for neighbor coordinates */
     @Test
     public void findNewNeighbors() {
         maze.generateMaze();

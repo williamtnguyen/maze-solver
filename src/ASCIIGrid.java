@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 /**
- * ASCII Representation of Maze Cell[][] grid Written by: Justin Zhu
+ * String[][] ASCII Representation of Cell[][] Maze/Grid
+ * Written by: Justin Zhu
  */
 public class ASCIIGrid {
     // In an ASCII Grid, you'll include all the walls, actual cells, and corners
@@ -182,7 +183,7 @@ public class ASCIIGrid {
      * in the input ArrayList<Cell> will be given a '#' as a marker to signify
      * visited.
      *
-     * @return
+     * @return an updated String[][] array
      */
     public String[][] updateASCIIGridWithShortestPath(ArrayList<Cell> shortestPath) {
         // New variable for traversal path so original grid doesn't get corrupted
@@ -219,16 +220,14 @@ public class ASCIIGrid {
     }
 
     /**
-     * Standard accessor methods
+     * Standard accessor methods if needed
      */
     public String[][] getGridASCII() {
         return gridASCII;
     }
-
     public String[][] getShortestPathASCII() {
         return shortestPathGridASCII;
     }
-
     public String[][] getTraversalPathASCII() {
         return traversalPathGridASCII;
     }
