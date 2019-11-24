@@ -4,9 +4,7 @@
  */
 public class MazePrinter {
 
-    /**
-     * Handles printing all mazes
-     */
+    /* Handles printing all mazes */
     public void printMaze(String[][] maze){
         String print = "";
         for(int x = 0; x < maze.length; x++){
@@ -17,6 +15,7 @@ public class MazePrinter {
             print = "";
         }
     }
+
 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~ //

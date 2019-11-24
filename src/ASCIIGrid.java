@@ -5,6 +5,7 @@ import java.util.ArrayList;
  * Written by: Justin Zhu
  */
 public class ASCIIGrid {
+
     // In an ASCII Grid, you'll include all the walls, actual cells, and corners
     // Rows...if n %2 = 0, "+-+-+-+" top/bottom walls and corners
     // ...if n % 2 = 1, "|.|.|.|" left/right walls and cells
@@ -40,9 +41,21 @@ public class ASCIIGrid {
         ySizeASCII = (ySize * 2) + 1;
     }
 
+    //For testing Professor's text file test cases
+    public ASCIIGrid(Maze maze, String[][] testCase) {
+        this.xSize = maze.getNumVertices();
+        this.ySize = maze.getNumVertices();
+        this.grid = maze.getGrid();
+        this.gridASCII = testCase;
+
+        // Calculated by Justin: number of total cells to represent our ASCII is: (numVertices * 2)
+        // Note that +1 denotes size vs. index
+        xSizeASCII = (xSize * 2) + 1;
+        ySizeASCII = (ySize * 2) + 1;
+    }
+
     /**
      * Initial Generation Step. Stores new grid into global gridASCII variable.
-     *
      * @return the initial String[][] array
      */
     public String[][] generateASCIIGrid() {
@@ -73,7 +86,6 @@ public class ASCIIGrid {
 
     /**
      * Updates generated grid walls based on maze's cell grid.
-     *
      * @return an updated String[][] array
      */
     public String[][] updateASCIIGridWalls() {
@@ -93,8 +105,7 @@ public class ASCIIGrid {
                 int i = 0;
                 int xDiff = 0;
                 int yDiff = 0;
-                // Only the left furthest north perimeter wall can be broken
-                // down, "x" if not.
+                // Only the left furthest north perimeter wall can be broken down, "x" if not.
                 for(int g = 0; g<grid[x][y].getConnections().size(); g++){
                     //North wall: cell x - cell connection x = 1
                     xDiff = grid[x][y].getX()-a.get(i).getX();
@@ -107,8 +118,7 @@ public class ASCIIGrid {
                             gridASCII[xASCII - 1][yASCII] = " ";
                         }
                     }
-                    // Right perimeter walls can't be broken down, "X" marker is
-                    // placed if done so.
+                    // Right perimeter walls can't be broken down, "X" marker is placed if done so.
                     if (yDiff == -1) { //Meaning east wall
                         if (grid[x][y] == grid[x][grid[x].length - 1]) {
                             gridASCII[xASCII][yASCII + 1] = "X";
@@ -116,9 +126,7 @@ public class ASCIIGrid {
                             gridASCII[xASCII][yASCII + 1] = " ";
                         }
                     }
-                    // Only the right furthest southern perimeter wall can be
-                    // broken
-                    // down, "X" if not.
+                    // Only the right furthest southern perimeter wall can be broken down, "X" if not.
                     if (xDiff == -1) { //Meaning south wall
                         if ((grid[x][y] == grid[grid.length - 1][y])
                                 && (grid[x][y] != grid[grid.length - 1][grid[x].length - 1])) {
@@ -128,8 +136,7 @@ public class ASCIIGrid {
                             gridASCII[xASCII + 1][yASCII] = " ";
                         }
                     }
-                    // Left perimeter walls can't be broken down, "X" marker is
-                    // placed if done so.
+                    // Left perimeter walls can't be broken down, "X" marker is placed if done so.
                     if (yDiff == 1) { //Meaning west wall
                         if (grid[x][y] == grid[x][0]) {
                             gridASCII[xASCII][yASCII - 1] = "X";
@@ -137,20 +144,16 @@ public class ASCIIGrid {
                             gridASCII[xASCII][yASCII - 1] = " ";
                         }
                     }
-//					i++;
+
                 }
             }
-//			}
-//			}
         }
         return gridASCII;
     }
 
     /**
      * Updates grid cells based on maze's cell traversal/visit order. Traversal
-     * order will go from 0-9 and reset back to 0 when traversal order reaches
-     * 9+
-     *
+     * order will go from 0-9 and reset back to 0 when traversal order reaches 9+
      * @return an updated String[][] array
      */
     public String[][] updateASCIIGridWithTraversalPath(ArrayList<Cell> visitOrder) {
@@ -158,7 +161,14 @@ public class ASCIIGrid {
         int traverseCount = 0;
 
         // New variable for traversal path so original grid doesn't get corrupted
-        traversalPathGridASCII = gridASCII;
+        // Copy every element over
+
+        traversalPathGridASCII = new String[xSizeASCII][ySizeASCII];
+        for(int i = 0; i < gridASCII.length; i++){
+            for(int j = 0; j<gridASCII[i].length; j++){
+                traversalPathGridASCII[i][j] = gridASCII[i][j];
+            }
+        }
 
         // For loop to traverse the ArrayList<Cell> to get the traversal order
         for (int i = 0; i < visitOrder.size(); i++) {
@@ -186,15 +196,26 @@ public class ASCIIGrid {
      * @return an updated String[][] array
      */
     public String[][] updateASCIIGridWithShortestPath(ArrayList<Cell> shortestPath) {
-        // New variable for traversal path so original grid doesn't get corrupted
-        shortestPathGridASCII = gridASCII;
 
+        // New variable for traversal path so original grid doesn't get corrupted
+        // Copy every element over
+        shortestPathGridASCII = new String[xSizeASCII][ySizeASCII];
+        for(int i = 0; i < gridASCII.length; i++){
+            for(int j = 0; j<gridASCII[i].length; j++){
+                shortestPathGridASCII[i][j] = gridASCII[i][j];
+            }
+        }
         // For loop to traverse the ArrayList<Cell> to get the traversal path
         for (int i = 0; i < shortestPath.size(); i++) {
             int xASCII = (shortestPath.get(i).getX() * 2) + 1;
             int yASCII = (shortestPath.get(i).getY() * 2) + 1;
 
             shortestPathGridASCII[xASCII][yASCII] = "#";
+            if(i != shortestPath.size() - 1){
+                int neighborXASCII = (shortestPath.get(i+1).getX()*2)+1;
+                int neighborYASCII = (shortestPath.get(i+1).getY()*2)+1;
+                shortestPathGridASCII[(xASCII + neighborXASCII)/2][(yASCII + neighborYASCII)/2] = "#";
+            }
         }
         return shortestPathGridASCII;
     }
@@ -202,21 +223,20 @@ public class ASCIIGrid {
     /**
      * Get Path Coordinates, total length of path, total visited cells
      */
-    public void printPath(ArrayList<Cell> shortestPath) {
-        System.out.print("Path: ");
+    public String getPath(ArrayList<Cell> shortestPath) {
+        String path = "Path: ";
         for (int i = 0; i < shortestPath.size(); i++) {
-            System.out.print("(" + shortestPath.get(i).getX() + "," + shortestPath.get(i).getY() + ") ");
+            path = path + "(" + shortestPath.get(i).getX() + "," + shortestPath.get(i).getY() + ") ";
         }
-        System.out.println("");
+        return path;
     }
 
-    public void printLength(ArrayList<Cell> shortestPath) {
-        System.out.println("Length of Shortest Path: " + shortestPath.size());
+    public String getLength(ArrayList<Cell> shortestPath) {
+        return ("Length of Shortest Path: " + shortestPath.size());
     }
 
-    public void printVisited(ArrayList<Cell> visitOrder) {
-        System.out.println("Visited Cells: " + visitOrder.size());
-
+    public String getVisited(ArrayList<Cell> visitOrder) {
+        return ("Visited Cells: " + visitOrder.size());
     }
 
     /**

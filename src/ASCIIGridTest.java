@@ -15,6 +15,7 @@ public class ASCIIGridTest {
     ASCIIGrid asciiGrid2 = new ASCIIGrid(maze2);
     MazePrinter printer = new MazePrinter();
 
+
     /* Works as expected, printing a fresh ASCII grid with all walls up */
     @Test
     public void generateASCIIGrid() {
@@ -71,13 +72,14 @@ public class ASCIIGridTest {
 
     /* Works as expected, prints shortest path coordinates */
     @Test
-    public void printPath() {
+    public void getPath() {
         maze.generateMaze();
         System.out.println("Shortest Path Display:");
         asciiGrid.updateASCIIGridWalls();
 
         ArrayList<Cell> shortestPath = maze.solveBFS().get(1);
         printer.printMaze(asciiGrid.updateASCIIGridWithShortestPath(shortestPath));
-        asciiGrid.printPath(shortestPath);
+        String path = asciiGrid.getPath(shortestPath);
+        System.out.println(path);
     }
 }

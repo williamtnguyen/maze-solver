@@ -212,8 +212,25 @@ public class Maze {
         return shortestOrder;
     }
 
-
     // Standard Accessor methods for encapsulation
     public int getNumVertices() { return this.numVertices; }
     public Cell[][] getGrid() { return this.grid; }
+
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+    /* Methods for solving Professor Potika's Mazes >:] */
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+    /**
+     * Replaces "this" cell grid with a generated one from Prof's .txt inputs
+     * @param generatedGrid a grid that is generated via reading Prof's .txt input mazes
+     */
+    public void replaceCellGrid(Cell[][] generatedGrid) {
+        this.grid = generatedGrid;
+    }
+
+    public void replaceStartAndFinishCell(Cell[][] generatedGrid) {
+        this.start = generatedGrid[0][0];
+        this.finish = generatedGrid[generatedGrid.length - 1][generatedGrid[generatedGrid.length - 1].length - 1];
+    }
 }

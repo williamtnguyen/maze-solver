@@ -23,6 +23,4 @@ public class CellTest {
         grid[0][0].addEdge(grid[0][1]);
         assertTrue(grid[0][0].hasEdge(grid[0][1]));
     }
-
-
 }
