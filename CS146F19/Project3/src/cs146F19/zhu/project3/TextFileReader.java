@@ -31,7 +31,7 @@ public class TextFileReader {
 		FileReader fr = new FileReader(f);
 		BufferedReader br = new BufferedReader(fr);
 		String firstLine = br.readLine(); 
-		System.out.println("FirstLine: " + firstLine);
+//		System.out.println("FirstLine: " + firstLine);
 		
 		//Grab dimensions
 		String[] gridSize = firstLine.split(" ");
@@ -77,12 +77,66 @@ public class TextFileReader {
 	public Cell[][] ASCIIGridToCellGrid(){
 		cellGrid = new Cell[xSize][ySize];
 		
+		for(int x=0; x<xSize; x++){
+			for(int y=0; y<ySize; y++){
+				cellGrid[x][y] = new Cell(x,y);
+			}
+		}
+		
+		for(int x=0; x<xSize; x++){
+			for(int y=0; y<ySize; y++){
+				int xASCII = (x*2)+1;
+				int yASCII = (y*2)+1;
+//				System.out.println(xASCII + ", "+yASCII);
+				if(cellGrid[x][y] == cellGrid[0][0]){ //Special case: first cell
+					if(!ASCIIGrid[xASCII][yASCII+1].equals("|")){ //If no wall to the right, then add connection
+						cellGrid[x][y].addEdge(cellGrid[x][y+1]);
+					}
+					if(!ASCIIGrid[xASCII+1][yASCII].equals("-")){ //If no wall below
+						cellGrid[x][y].addEdge(cellGrid[x+1][y]);
+					}
+				}
+				else if(cellGrid[x][y] == cellGrid[xSize-1][ySize-1]){ //Special case: last cell
+					if(!ASCIIGrid[xASCII][yASCII-1].equals("|")){ //If no wall to left
+						cellGrid[x][y].addEdge(cellGrid[x][y-1]);
+					}
+					if(!ASCIIGrid[xASCII-1][yASCII].equals("-")){ //If no wall above
+						cellGrid[x][y].addEdge(cellGrid[x-1][y]);
+					}
+				}
+				else{ //Base case
+					if((x+1)<xSize){ //Within upper row dimension bounds
+						if(!ASCIIGrid[xASCII+1][yASCII].equals("-")){ //If no wall below
+							cellGrid[x][y].addEdge(cellGrid[x+1][y]);
+						}
+					}
+					if((x-1)>0){ //Within lower row dimension bounds
+						if(!ASCIIGrid[xASCII-1][yASCII].equals("-")){ //If no wall above
+							cellGrid[x][y].addEdge(cellGrid[x-1][y]);
+						}
+					}
+					if((y-1)>0){ //Within lower col dimension bounds
+						if(!ASCIIGrid[xASCII][yASCII-1].equals("|")){ //If no wall to left
+							cellGrid[x][y].addEdge(cellGrid[x][y-1]);
+						}
+					}
+					if((y+1)<ySize){ //Within upper col dimension bounds
+						if(!ASCIIGrid[xASCII][yASCII+1].equals("|")){ //If no wall to the right, then add connection
+							cellGrid[x][y].addEdge(cellGrid[x][y+1]);
+						}
+					}
+				}
+			}
+		}
+		
+		
 		return cellGrid;
 	}
 	//And then from here, we can probably just create a new maze, and manually change the 
 	//private variables (cell[][], vertices, all the other data needed) within the maze 
 	//and run all the algorithms needed to solve the maze.
 	
+	//BFS and DFS require connections for each cell, starting point and finishing point
 	
 	
 	public int getXSize(){
@@ -90,5 +144,13 @@ public class TextFileReader {
 	}
 	public int getYSize(){
 		return this.ySize;
+	}
+	
+	public String[][] getASCIIGrid(){
+		return this.ASCIIGrid;
+	}
+	
+	public Cell[][] getCellGrid(){
+		return this.cellGrid;
 	}
 }

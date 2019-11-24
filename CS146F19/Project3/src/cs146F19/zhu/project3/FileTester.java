@@ -12,20 +12,45 @@ public class FileTester {
 		File m8 =new File("sample-inputs/maze8.txt");
 		File m10 =new File("sample-inputs/maze10.txt");
 		File m20 =new File("sample-inputs/maze20.txt");
-//		TextFileReader t = new TextFileReader(m4);
-		TextFileReader t = new TextFileReader(m6);
-//		TextFileReader t = new TextFileReader(m8);
-//		TextFileReader t = new TextFileReader(m10);
-//		TextFileReader t = new TextFileReader(m20);
+		TextFileReader t = new TextFileReader(m4);
+		TextFileReader t1 = new TextFileReader(m6);
+		TextFileReader t2 = new TextFileReader(m8);
+		TextFileReader t3 = new TextFileReader(m10);
+		TextFileReader t4 = new TextFileReader(m20);
 
 		
 		ArrayList<String> gridList= t.copyToList();
 		System.out.println("X: "+ t.getXSize()+", Y: " + t.getYSize());
 		
-//		for(int x=0; x<gridList.size(); x++){
-//			System.out.println(gridList.get(x));
-//		}
+		String[][] s = t.listToASCIIGrid();
+		System.out.println("Grid to Solve:");
 		m.printMaze(t.listToASCIIGrid());
+		Cell[][] c = t.ASCIIGridToCellGrid();
+		Maze dfsTest = new Maze(t.getXSize());
+		dfsTest.replaceCellGrid(c);
+		dfsTest.replaceStartAndFinishCell(c);
+		ArrayList<Cell> dfs=dfsTest.solveDFS();
+		
+		Maze bfsTest = new Maze(t.getXSize());
+		bfsTest.replaceCellGrid(c);
+		bfsTest.replaceStartAndFinishCell(c);
+		ArrayList<ArrayList<Cell>> traversal = bfsTest.solveBFS();
+		ArrayList<Cell> bfs = traversal.get(0);
+		ArrayList<Cell> shortestPath = traversal.get(1);
 
+		ASCIIGrid dfsTestASCII = new ASCIIGrid(dfsTest, t.listToASCIIGrid());
+		ASCIIGrid bfsTestASCII = new ASCIIGrid(bfsTest, t.listToASCIIGrid());
+
+		String[][] gridSolvedDFS = dfsTestASCII.updateASCIIGridWithTraversalPath(dfs);
+		System.out.println("Solved DFS: ");
+		m.printMaze(gridSolvedDFS);
+//		
+		String[][] gridSolvedBFS = bfsTestASCII.updateASCIIGridWithTraversalPath(bfs);
+		System.out.println("Solved BFS: ");
+		m.printMaze(gridSolvedBFS);
+//		
+		String[][] gridSolvedShortest = bfsTestASCII.updateASCIIGridWithShortestPath(shortestPath);
+		System.out.println("Solved ShortestPath: ");
+		m.printMaze(gridSolvedShortest);
 	}
 }

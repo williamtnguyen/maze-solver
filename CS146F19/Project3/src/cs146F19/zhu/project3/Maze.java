@@ -71,7 +71,9 @@ public class Maze {
 
         // Initially the starting point
         Cell currCell = start;
+
         cellStack.push(currCell);
+        
 
         // The goal is not to visit all nodes, but rather to reach the finishing Cell
         while(!currCell.equals(finish)) {
@@ -216,4 +218,23 @@ public class Maze {
     // Standard Accessor methods for encapsulation
     public int getNumVertices() { return this.numVertices; }
     public Cell[][] getGrid() { return this.grid; }
+    public Cell getStartCell(){ return this.start; }
+    public Cell getFinishCell(){ return this.finish; }
+    
+    //Replace Cell[][] for test case, since we're not generating our own maze
+    public void replaceCellGrid(Cell[][] c){
+    	grid = c;
+//    	System.out.println(c[0][1].getConnections());
+//    	System.out.println(c[0][1].getX() +", " + c[0][1].getY()+" " + c[0][1]);
+//    	System.out.println(c[0][0].getX() +", " + c[0][0].getY()+ " " +c[0][0]);
+//    	System.out.println(c[1][1].getX() +", " + c[1][1].getY()+ " " +c[1][1]);
+    }
+    public void replaceStartAndFinishCell(Cell[][] c){
+ 
+    	this.start=c[0][0];
+    	this.finish=c[c.length-1][c[c.length-1].length-1];
+//    	System.out.println(c[c.length-1][c[c.length-1].length-1].getX() +", " + 
+//    	c[c.length-1][c[c.length-1].length-1].getY()+ " " +c[c.length-1][c[c.length-1].length-1]);
+    	
+    }
 }

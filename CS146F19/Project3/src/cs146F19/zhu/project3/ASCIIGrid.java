@@ -41,6 +41,21 @@ public class ASCIIGrid {
         xSizeASCII = (xSize * 2) + 1;
         ySizeASCII = (ySize * 2) + 1;
     }
+    
+    //For testing Professor's text file test cases
+    public ASCIIGrid(Maze maze, String[][] testCase) {
+        this.xSize = maze.getNumVertices();
+        this.ySize = maze.getNumVertices();
+        this.grid = maze.getGrid();
+        this.gridASCII = testCase;
+        // Calculated by Justin: number of total cells to represent our ASCII
+        // is: (numVertices * 2)
+        // Note that +1 denotes size vs. index
+        xSizeASCII = (xSize * 2) + 1;
+        ySizeASCII = (ySize * 2) + 1;
+        
+        
+    }
 
     /**
      * Initial Generation Step. Stores new grid into global gridASCII variable.
@@ -139,11 +154,9 @@ public class ASCIIGrid {
                             gridASCII[xASCII][yASCII - 1] = " ";
                         }
                     }
-//					i++;
+
                 }
             }
-//			}
-//			}
         }
         return gridASCII;
     }
@@ -160,7 +173,14 @@ public class ASCIIGrid {
         int traverseCount = 0;
 
         // New variable for traversal path so original grid doesn't get corrupted
-        traversalPathGridASCII = gridASCII;
+    	// Copy every element over
+        
+        traversalPathGridASCII = new String[xSizeASCII][ySizeASCII];
+        for(int i = 0; i < gridASCII.length; i++){
+        	for(int j = 0; j<gridASCII[i].length; j++){
+        		traversalPathGridASCII[i][j] = gridASCII[i][j];
+        	}
+        }
 
         // For loop to traverse the ArrayList<Cell> to get the traversal order
         for (int i = 0; i < visitOrder.size(); i++) {
@@ -188,8 +208,16 @@ public class ASCIIGrid {
      * @return an updated String[][] array
      */
     public String[][] updateASCIIGridWithShortestPath(ArrayList<Cell> shortestPath) {
+    	
         // New variable for traversal path so original grid doesn't get corrupted
-        shortestPathGridASCII = gridASCII;
+    	// Copy every element over
+        shortestPathGridASCII = new String[xSizeASCII][ySizeASCII];
+        for(int i = 0; i < gridASCII.length; i++){
+        	for(int j = 0; j<gridASCII[i].length; j++){
+        		shortestPathGridASCII[i][j] = gridASCII[i][j];
+        	}
+        }       
+
 
         // For loop to traverse the ArrayList<Cell> to get the traversal path
         for (int i = 0; i < shortestPath.size(); i++) {
