@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8552b342-0b2e-4e51-93ba-b451b4025227" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/maze-solver.iws" beforeDir="false" afterPath="$PROJECT_DIR$/maze-solver.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/ASCIIGrid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/ASCIIGrid.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/ASCIIGridTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/ASCIIGridTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/Cell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/Maze.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/Maze.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/MazePrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/MazePrinter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/maze-solver/MazeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/maze-solver/MazeTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ASCIIGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ASCIIGrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ASCIIGridTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ASCIIGridTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Maze.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MazePrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MazePrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MazeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MazeTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="8552b342-0b2e-4e51-93ba-b451b4025227" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +46,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ASCIIGridTest.updateASCIIGridWithShortestPath">
+  <component name="RunManager" selected="JUnit.ASCIIGridTest.updateASCIIGridWithTraversalPath">
     <configuration name="ASCIIGridTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="maze-solver" />
       <option name="PACKAGE_NAME" value="" />
@@ -112,8 +98,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ASCIIGridTest.updateASCIIGridWithShortestPath" />
         <item itemvalue="JUnit.ASCIIGridTest.updateASCIIGridWithTraversalPath" />
+        <item itemvalue="JUnit.ASCIIGridTest.updateASCIIGridWithShortestPath" />
         <item itemvalue="JUnit.MazeTest.solveBFS" />
         <item itemvalue="JUnit.ASCIIGridTest" />
         <item itemvalue="JUnit.ASCIIGridTest.updateASCIIGridWalls" />

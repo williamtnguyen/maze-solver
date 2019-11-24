@@ -206,6 +206,7 @@ public class Maze {
             cellStack.push(currCell);
             currCell = currCell.getParent();
         }
+        // Putting it into a List to make our lives easier
         ArrayList<Cell> shortestOrder = new ArrayList<>();
         while(!cellStack.isEmpty()) { shortestOrder.add(cellStack.pop()); }
         return shortestOrder;
