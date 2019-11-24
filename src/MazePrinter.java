@@ -2,47 +2,26 @@
  * This class handles the displaying of unsolved mazes,
  * -and the printing of paths for DFS/BFS solutions
  */
-/**
- * This class handles the displaying of unsolved mazes,
- * -and the printing of paths for DFS/BFS solutions
- */
 public class MazePrinter {
 
-    public MazePrinter(Maze maze) {
-
-    }
-
-    public MazePrinter(){
-
-    }
-
     /**
-     * Handles displaying the unsolved maze
+     * Handles printing all mazes
      */
-    public void displayGraph() {
-
+    public void printMaze(String[][] maze){
+        String print = "";
+        for(int x = 0; x < maze.length; x++){
+            for(int y = 0; y < maze[0].length; y++){
+                print += maze[x][y];
+            }
+            System.out.println(print);
+            print = "";
+        }
     }
 
-    /**
-     * Prints DFS visit order on the simulated maze
-     */
-    public void printVisitOrderDFS() {
 
-    }
-
-    /**
-     * Prints BFS visit order on the simulated maze
-     */
-    public void printVisitOrderBFS() {
-
-    }
-
-    /**
-     * Prints the shortest-path from start to finish
-     */
-    public void printPath() {
-
-    }
+    // ~~~~~~~~~~~~~~~~~~~~~~~~ //
+    /*  IGNORE, random testing */
+    // ~~~~~~~~~~~~~~~~~~~~~~~ //
 
     // All dots are the spots
     // Maze Grid Array [0][0] -> [3][3]
@@ -66,17 +45,6 @@ public class MazePrinter {
     public void printTestMaze(){
         for(String s : maze){
             System.out.println(s);
-        }
-    }
-
-    public void printMaze(String[][] maze){
-        String print = "";
-        for(int x = 0; x < maze.length; x++){
-            for(int y = 0; y < maze[0].length; y++){
-                print += maze[x][y];
-            }
-            System.out.println(print);
-            print = "";
         }
     }
 }

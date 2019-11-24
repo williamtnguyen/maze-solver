@@ -1,56 +1,78 @@
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
 public class ASCIIGridTest {
 
     private Maze maze = new Maze(4);
-    private ASCIIGrid asciiGrid = new ASCIIGrid(maze);
-    private MazePrinter p = new MazePrinter(maze);
+    private Maze maze2 = new Maze(4);
+    private Cell[][] grid = maze.getGrid();
+    private Cell[][] grid2 = maze2.getGrid();
 
+    ASCIIGrid asciiGrid = new ASCIIGrid(maze);
+    ASCIIGrid asciiGrid2 = new ASCIIGrid(maze2);
+    MazePrinter printer = new MazePrinter();
 
+    /* Works as expected, printing a fresh ASCII grid with all walls up */
     @Test
     public void generateASCIIGrid() {
+        printer.printMaze(asciiGrid.generateASCIIGrid());
     }
 
+    /* Works as expected, printing an ASCII grid with edge relationships */
     @Test
     public void updateASCIIGridWalls() {
+        maze.generateMaze();
+        printer.printMaze(asciiGrid.updateASCIIGridWalls());
     }
 
+    /* Works as expected (and caused a lot of headache), properly displays DFS/BFS Traversal */
     @Test
     public void updateASCIIGridWithTraversalPath() {
-        int index = 0; // to get the next element on top of array (FIFO order)
-
-        // Call this before you call maze.generateMaze() because if you do it after, grid will have been modified already
-        asciiGrid.generateASCIIGrid();
-
-        // Knocks walls down and updates grid to a maze with 1 solution
+        // DFS Display
         maze.generateMaze();
+        System.out.println("Grid to be solved:");
+        printer.printMaze(asciiGrid.updateASCIIGridWalls());
 
-        // Call this after "maze.generateMaze()" because that updates the ASCII grid with knocked down walls
-//        asciiGrid.updateASCIIGridWalls();
+        System.out.print("\nSolved Grid using DFS:");
+        ArrayList<Cell> visitOrder = maze.solveDFS();
+        System.out.print("\n");
+        printer.printMaze(asciiGrid.updateASCIIGridWithTraversalPath(visitOrder));
+        System.out.print("\n");
 
-        // ArrayLists containing the visit order of the traversal. Only test one at a time, this is just for example
-        ArrayList<Cell> dfsVisitOrder = maze.solveDFS();
-//        ArrayList<Cell> bfsVisitOrder = maze.solveBFS();
+        // BFS Display
+        maze2.generateMaze();
+        System.out.println("Grid to be solved:");
+        printer.printMaze(asciiGrid2.updateASCIIGridWalls());
 
-        asciiGrid.updateASCIIGridWithTraversalPath(dfsVisitOrder);
-
-        // Todo: print accordingly
-        System.out.println("Grid with broken walls");
-        p.printMaze(asciiGrid.getGridASCII());
-
-        System.out.println("Grid with broken walls");
-        p.printMaze(asciiGrid.getShortestPathASCII());
-
-        System.out.println("Traversal Path");
-        p.printMaze(asciiGrid.getTraversalPathASCII());
+        System.out.print("\nSolved Grid using BFS:");
+        ArrayList<Cell> visitOrder2 = maze2.solveBFS().get(0);
+        System.out.print("\n");
+        printer.printMaze(asciiGrid2.updateASCIIGridWithTraversalPath(visitOrder2));
     }
+
 
     @Test
     public void updateASCIIGridWithShortestPath() {
+        maze.generateMaze();
+        System.out.println("Grid to be solved:");
+        printer.printMaze(asciiGrid.updateASCIIGridWalls());
+
+        ArrayList<ArrayList<Cell>> traversals = maze.solveBFS();
+        ArrayList<Cell> visitOrder = traversals.get(0);
+        ArrayList<Cell> shortestOrder = traversals.get(1);
+
+        // BFS Traversal
+        System.out.print("\nSolved Grid using BFS:");
+        System.out.print("\n");
+        printer.printMaze(asciiGrid.updateASCIIGridWithTraversalPath(visitOrder));
+        System.out.print("\n");
+
+        // Shortest Path Traversal
+        System.out.println("Shortest Path Traversal:");
+        printer.printMaze(asciiGrid.updateASCIIGridWithShortestPath(shortestOrder));
     }
 
     @Test
