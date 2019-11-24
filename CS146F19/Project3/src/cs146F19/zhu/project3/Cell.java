@@ -3,16 +3,21 @@ package cs146F19.zhu.project3;
 import java.util.ArrayList;
 
 /**
- * Data Structure to hold the x & y coordinates of a cell
+ * Data Structure to hold the X & Y coordinates of a cell
  * Written By: William Nguyen
  */
 public class Cell {
     // X & Y coordinates
     private final int x, y;
     // neighbors is all valid neighbors, connections is edge relationships
-    private ArrayList<Cell> neighbors, connections;
+    public ArrayList<Cell> neighbors, connections; // public to allow modification by value, not reference
+    // Fields to be utilized in BFS traversal and Dijkstra's shortest Path
+    private Cell parent;
+    private int distance;
+    private int color;  // 0 = WHITE; 1 = GREY; 2 = BLACK
 
 
+    // Standard Constructor to initialize instance fields
     public Cell(int x, int y) {
         // Theoretically, once x and y is set, it does not change
         this.x = x;
@@ -20,7 +25,6 @@ public class Cell {
 
         // Instantiate neighbor and connection fields, will be modified in Maze class
         this.neighbors = new ArrayList<>();
-        /* NOTE: "Index : NeighborDirection" = { 0:North, 1:East, 2:South, 3:West } */
         this.connections = new ArrayList<>();
     }
 
@@ -72,6 +76,7 @@ public class Cell {
 
     // Emulates knocking down a wall between 2 cells
     public void addEdge(Cell neighbor) {
+
         /* Although we call it "X", we determine "X" as "i" in the loop, which dictates rows (y-index) */
 
         // North/South Edge: Neighbor is above "this" Cell
@@ -94,17 +99,35 @@ public class Cell {
             this.connections.add(neighbor);
             neighbor.connections.add(this);
         }
-
-        // nvm about this  vvv
-//        // Removing "this" Cell and Neighbor from eachother's neighbor list so we don't visit it again
-//        this.neighbors.remove(neighbor);
-//        neighbor.neighbors.remove(this);
     }
+
+    // Easier than using a set
+    public void removeEdge(Cell neighbor) {
+        this.connections.remove(neighbor);
+        neighbor.connections.remove(this);
+    }
+
+    // Removes neighbor bi-directionally
+    public void removeNeighbor(Cell neighbor) {
+        this.neighbors.remove(neighbor);
+        neighbor.neighbors.remove(this);
+    }
+
+    /* Mutator methods for BFS() */
+    public void setColor(int color) { this.color = color; }
+    public void setDistance(int distance) { this.distance = distance; }
+    public void setParent(Cell daddy) { this.parent = daddy; }
+
+    /* Accessor methods for BFS() */
+    public int getColor() { return this.color; }
+    public int getDistance() { return this.distance; }
+    public Cell getParent() { return this.parent; }
 
 
     // Equals/Hashcode contract
     @Override
     public boolean equals(Object x) {
+        if(this.getClass() != x.getClass()) { return false; }
         Cell that = (Cell)x;
         return this.getX() == that.getX() && this.getY() == that.getY();
     }

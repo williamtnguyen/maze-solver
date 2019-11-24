@@ -8,42 +8,54 @@ import static org.junit.Assert.*;
 
 public class MazeTest {
 
-    Maze maze = new Maze(4);
+    Maze maze = new Maze(3);
     Cell[][] grid = maze.getGrid();
 
-    /* Testing if the method compiles properly */
+    /* Testing if the method compiles properly before applying DFS/BFS */
     @Test
     public void generateMaze() {
         maze.generateMaze();
     }
 
-
+    /* Works as expected, testing for traversal coordinates */
     @Test
     public void solveDFS() {
         maze.generateMaze();
         List<Cell> visitOrder = maze.solveDFS();
         // Asserting DFS reached the finish point
-        assertEquals(3, visitOrder.get(visitOrder.size() - 1).getX());
-        assertEquals(3, visitOrder.get(visitOrder.size() - 1).getY());
+        assertEquals(2, visitOrder.get(visitOrder.size() - 1).getX());
+        assertEquals(2, visitOrder.get(visitOrder.size() - 1).getY());
         // Printing visit order
-        for(Cell c : visitOrder) {
+        for (Cell c : visitOrder) {
             System.out.println("X Coord: " + c.getX() + " Y Coord: " + c.getY());
         }
     }
 
+    /* Works as expected, testing for traversal coordinates */
     @Test
     public void solveBFS() {
         maze.generateMaze();
-        List<Cell> visitOrder = maze.solveBFS();
+        List<Cell> visitOrder = maze.solveBFS().get(0);
         // Asserting BFS reached the finish point
-        assertEquals(3, visitOrder.get(visitOrder.size() - 1).getX());
-        assertEquals(3, visitOrder.get(visitOrder.size() - 1).getY());
-        for(Cell c : visitOrder) {
+        assertEquals(2, visitOrder.get(visitOrder.size() - 1).getX());
+        assertEquals(2, visitOrder.get(visitOrder.size() - 1).getY());
+        for (Cell c : visitOrder) {
             System.out.println("X Coord: " + c.getX() + " Y Coord: " + c.getY());
         }
     }
 
+    /* Works as expected, testing for neighbor coordinates */
     @Test
     public void findNewNeighbors() {
+        maze.generateMaze();
+        for (int i = 0; i < maze.getNumVertices(); i++) {
+            for (int j = 0; j < maze.getNumVertices(); j++) {
+                List<Cell> edges = grid[i][j].getConnections();
+                for (Cell edge : edges) {
+                    System.out.print("X Coord: " + edge.getX() + " ");
+                    System.out.println("Y Coord: " + edge.getY());
+                }
+            }
+        }
     }
 }
